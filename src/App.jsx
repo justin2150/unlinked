@@ -8,8 +8,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<LoginPage />} />
-        <Route path="idme" element={<IdmePage />} />
-        <Route path="upload-id" element={<UploadID />} />
+        <Route path="/idme" element={<IdmePage />} />
+        <Route path="/upload-id" element={<UploadID />} />
       </Routes>
     </BrowserRouter>
   );
