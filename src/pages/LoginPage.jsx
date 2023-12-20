@@ -83,7 +83,7 @@ export default function LoginPage() {
         <PhoneNumber />
         <Address />
         <Button>Submit</Button>
-        <Link to="/idme">Go to Idme Page</Link>
+        <Link to="/upload-id">Go to upload id Page</Link>
       </form>
     </main>
   );
