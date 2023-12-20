@@ -11,7 +11,7 @@ export default function App() {
         <Route index element={<LoginPage />} />
         <Route path="/idme" element={<IdmePage />} />
         <Route path="/upload-id" element={<UploadID />} />
-        <Route path="*" element={NotFound} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
