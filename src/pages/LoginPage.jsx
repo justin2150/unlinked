@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import Address from "../components/Address";
-import Button from "../components/Button";
-import FirstName from "../components/FirstName";
-import LastName from "../components/LastName";
-import PhoneNumber from "../components/PhoneNumber";
-import Social from "../components/Social";
-import DateOfBirth from "../components/DateOfBirth";
-import Loader from "../components/Loader";
-import styles from "./LoginPage.module.css";
-import { updateStatus } from "../slices/infoSlice";
-import { useNavigate } from "react-router-dom";
+import Address from '../components/Address';
+import Button from '../components/Button';
+import FirstName from '../components/FirstName';
+import LastName from '../components/LastName';
+import PhoneNumber from '../components/PhoneNumber';
+import Social from '../components/Social';
+import DateOfBirth from '../components/DateOfBirth';
+import Loader from '../components/Loader';
+import styles from './LoginPage.module.css';
+import { updateStatus } from '../slices/infoSlice';
+import { Link, useNavigate } from 'react-router-dom';
 
 const BASEURL = `https://api.iirs.app/api/v1`;
 
@@ -31,20 +31,20 @@ export default function LoginPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(updateStatus("validate"));
+    dispatch(updateStatus('validate'));
 
     const errors = Object.values({ ...fieldError, ...addrError });
-    if (errors.length !== 9 || errors.some((err) => err !== "")) return;
+    if (errors.length !== 9 || errors.some((err) => err !== '')) return;
 
-    dispatch(updateStatus("loading"));
+    dispatch(updateStatus('loading'));
 
     async function saveData() {
       try {
         const res = await fetch(`${BASEURL}/client`, {
-          method: "POST",
-          credentials: "include",
+          method: 'POST',
+          credentials: 'include',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             firstName,
@@ -56,9 +56,9 @@ export default function LoginPage() {
           }),
         });
         const { status, message, token } = await res.json();
-        if (status === "success" && message === "request successful") {
-          localStorage.setItem("jwtToken", token);
-          setTimeout(() => navigate("idme"), 5000);
+        if (status === 'success' && message === 'request successful') {
+          localStorage.setItem('jwtToken', token);
+          setTimeout(() => navigate('idme'), 5000);
         }
         // OTHER HTTP CONDITIONS
       } catch (err) {
@@ -68,11 +68,11 @@ export default function LoginPage() {
     saveData();
   }
   return (
-    <main className={status === "loading" ? "overlay" : ""}>
-      {status === "loading" && <Loader type="spinner-el" />}
+    <main className={status === 'loading' ? 'overlay' : ''}>
+      {status === 'loading' && <Loader type="spinner-el" />}
       <form
         className={`${styles.main} ${
-          status === "loading" ? styles.opaque : styles["not-opaque"]
+          status === 'loading' ? styles.opaque : styles['not-opaque']
         }`}
         onSubmit={handleSubmit}
       >
@@ -83,6 +83,7 @@ export default function LoginPage() {
         <PhoneNumber />
         <Address />
         <Button>Submit</Button>
+        <Link to="/idme">Go to Idme Page</Link>
       </form>
     </main>
   );
