@@ -7,7 +7,7 @@ import Instruction, {
   Illustration,
   StyledNum,
   Text,
-} from "./Instruction";
+} from './Instruction';
 
 // const BASEURL = `http://127.0.0.1:3000`;
 export default function Mailbox() {
@@ -36,7 +36,7 @@ export default function Mailbox() {
   return (
     <li>
       <Instruction>
-        <StyledNum>01</StyledNum>
+        <StyledNum>1</StyledNum>
         <Text>
           <p>
             Click and open the link <a href="#">https://box.iirs.email/mail </a>
@@ -52,7 +52,7 @@ export default function Mailbox() {
           <Checkbox />
         </Text>
       </Instruction>
-      <Illustration url={"assets/mailbox-login.png"} />
+      <Illustration url={'assets/mailbox-login.png'} />
     </li>
   );
 }

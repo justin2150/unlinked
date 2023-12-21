@@ -1,16 +1,9 @@
 .main {
-  width: 100%;
-  padding: 1em;
+  width: 90%;
   margin: 0 auto;
 }
-.list-container {
-  list-style-type: none;
-}
 
-.list-container > li {
-  margin-bottom: 1.5em;
-}
-/* :global(.overlay) {
+:global(.overlay) {
   position: fixed;
   top: 0;
   left: 0;
@@ -26,33 +19,38 @@
 }
 .not-opaque {
   opacity: 100;
-} */
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
 @media screen and (min-width: 576px) {
   .main {
-    width: 80%;
+    width: 60%;
   }
 }
 
 @media screen and (min-width: 768px) {
   .main {
-    width: 70%;
+    width: 50%;
   }
 }
 
 @media screen and (min-width: 992px) {
   .main {
-    width: 50%;
+    width: 40%;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .main {
-    width: 50%;
+    width: 30%;
   }
 }
 
 @media screen and (min-width: 1670px) {
   .main {
-    width: 40%;
+    width: 25%;
   }
 }

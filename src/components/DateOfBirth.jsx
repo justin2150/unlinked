@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import InputField from "./InputField";
-import { useDispatch, useSelector } from "react-redux";
-import { fieldError, updateField } from "../slices/infoSlice";
+import { useEffect, useState } from 'react';
+import InputField from './InputField';
+import { useDispatch, useSelector } from 'react-redux';
+import { fieldError, updateField } from '../slices/infoSlice';
 
-function DateOfBirth() {
-  const [DOB, setDOB] = useState("");
+export default function DateOfBirth() {
+  const [DOB, setDOB] = useState('');
   const [isFocus, setIsFocus] = useState(false);
   const dispatch = useDispatch();
   const {
@@ -14,11 +14,11 @@ function DateOfBirth() {
 
   useEffect(
     function () {
-      if (status !== "validate") return;
-      if (DOB === "") {
-        dispatch(fieldError("DOB", "This field is required"));
-      } else if (DOB.split("").filter((d) => d !== "-").length < 8)
-        dispatch(fieldError("DOB", "Date of birth is not valid"));
+      if (status !== 'validate') return;
+      if (DOB === '') {
+        dispatch(fieldError('DOB', 'This field is required'));
+      } else if (DOB.split('').filter((d) => d !== '-').length < 8)
+        dispatch(fieldError('DOB', 'Date of birth is not valid'));
     },
     [DOB, dispatch, status]
   );
@@ -48,10 +48,10 @@ function DateOfBirth() {
     if (val.length === 6) {
       setDOB(`${val.slice(0, 2)}-${val.slice(3, 5)}-${val.slice(-1)}`);
     }
-    if (val.length === 6 && val.at(-1) === "-")
+    if (val.length === 6 && val.at(-1) === '-')
       setDOB(`${val.slice(0, 2)}-${val.slice(3, 5)}`);
-    if (val.length === 3 && val.at(-1) === "-") setDOB(`${val.slice(0, 2)}`);
-    dispatch(updateField("DOB", val));
+    if (val.length === 3 && val.at(-1) === '-') setDOB(`${val.slice(0, 2)}`);
+    dispatch(updateField('DOB', val));
   };
   return (
     <InputField
@@ -66,4 +66,24 @@ function DateOfBirth() {
   );
 }
 
-export default DateOfBirth;
+export function BirthYear() {
+  const [year, setYear] = useState('');
+  const [isFocus, setIsFocus] = useState(false);
+
+  function handleChange(e) {
+    const val = e.target.value;
+    if (val.match(/[^0-9]+/g)) return;
+    if (val.length > 4) return;
+    setYear(val);
+  }
+  return (
+    <InputField
+      isFocus={isFocus}
+      setIsFocus={setIsFocus}
+      value={year}
+      onChange={handleChange}
+    >
+      Year of birth
+    </InputField>
+  );
+}

@@ -1,8 +1,12 @@
 .main {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 }
-
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
 :global(.overlay) {
   position: fixed;
   top: 0;
@@ -19,6 +23,11 @@
 }
 .not-opaque {
   opacity: 100;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
 }
 @media screen and (min-width: 576px) {
   .main {

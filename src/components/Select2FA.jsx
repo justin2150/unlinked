@@ -3,13 +3,13 @@ import Instruction, {
   Illustration,
   StyledNum,
   Text,
-} from "./Instruction";
+} from './Instruction';
 
 export default function Select2FA() {
   return (
     <li>
       <Instruction>
-        <StyledNum>05</StyledNum>
+        <StyledNum>5</StyledNum>
         <Text>
           <p>
             The next screen will ask you to choose a multi factor authentication
@@ -19,7 +19,7 @@ export default function Select2FA() {
           <Checkbox />
         </Text>
       </Instruction>
-      <Illustration url={"assets/idme-select-2fa.png"} />
+      <Illustration url={'assets/idme-select-2fa.png'} />
     </li>
   );
 }

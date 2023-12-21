@@ -2,20 +2,21 @@
   display: flex;
   align-items: flex-start;
   position: relative;
+  padding: 1em 0;
 }
 .number {
-  border-radius: 50%;
+  /* border-radius: 50%; */
+  /* padding: 1em 0.5em; */
+  /* background-color: var(--primary); */
+  /* color: var(--white); */
   font-size: 2em;
-  padding: 1em 0.5em;
   margin-right: 0.5em;
-  background-color: var(--purple);
-  color: var(--white);
 }
 .checkbox {
   position: absolute;
   bottom: 0;
   right: 1em;
-  accent-color: var(--purple);
+  accent-color: var(--primary);
   width: 1.35em !important;
   height: 1.35em !important;
 }

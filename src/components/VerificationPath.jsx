@@ -1,10 +1,10 @@
-import Instruction, { Illustration, StyledNum, Text } from "./Instruction";
+import Instruction, { Illustration, StyledNum, Text } from './Instruction';
 
 export default function VerificationPath() {
   return (
     <li>
       <Instruction>
-        <StyledNum>08</StyledNum>
+        <StyledNum>8</StyledNum>
         <Text>
           <p>
             You&apos;ll then be asked to select a verification path. The self
@@ -14,7 +14,7 @@ export default function VerificationPath() {
           </p>
         </Text>
       </Instruction>
-      <Illustration url={"assets/idme-select-2fa.png"} />
+      <Illustration url={'assets/idme-select-2fa.png'} />
     </li>
   );
 }

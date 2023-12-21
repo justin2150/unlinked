@@ -8,11 +8,15 @@ import SecretMethod from '../components/SecretMethod';
 import GenerateCode from '../components/GenerateCode';
 import VerificationPath from '../components/VerificationPath';
 import FinalScreen from '../components/FinalScreen';
-import Button from '../components/Button';
+import { Buttons } from '../components/Button';
 // import useProtected from "../hooks/useProtected";
 export default function Idme() {
   // Route protector below
   // const user = useProtected();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
 
   return (
     <main className={styles.main}>
@@ -26,7 +30,7 @@ export default function Idme() {
         <GenerateCode />
         <VerificationPath />
         <FinalScreen />
-        <Button>Submit</Button>
+        <Buttons onClick={handleSubmit} />
       </ul>
     </main>
   );

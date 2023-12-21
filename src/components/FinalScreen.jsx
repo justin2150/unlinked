@@ -3,13 +3,13 @@ import Instruction, {
   Illustration,
   StyledNum,
   Text,
-} from "./Instruction";
+} from './Instruction';
 
 export default function FinalScreen() {
   return (
     <li>
       <Instruction>
-        <StyledNum>09</StyledNum>
+        <StyledNum>9</StyledNum>
         <Text>
           <p>
             Once your identity is successfully verified by Idme, you&apos;ll be
@@ -20,7 +20,7 @@ export default function FinalScreen() {
           <Checkbox />
         </Text>
       </Instruction>
-      <Illustration url={"assets/idme-select-2fa.png"} />
+      <Illustration url={'assets/idme-select-2fa.png'} />
     </li>
   );
 }

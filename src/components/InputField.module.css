@@ -53,7 +53,7 @@
 .label-error {
   top: 25%;
   transform: translateY(-25%);
-  color: #fc5185;
+  color: var(--danger);
 }
 .label-focus {
   transform: translate(-12px, -35px) scale(0.85);
@@ -62,16 +62,16 @@
 }
 
 .text-error {
-  color: #fc5185;
+  color: var(--danger);
   font-size: 12px;
   line-height: 24px;
   padding: 0 16px;
 }
 .input-error {
-  box-shadow: 0 0 0 #fc5185;
-  border: 1.5px solid #fc5185;
+  box-shadow: 0 0 0 var(--danger);
+  border: 1.5px solid var(--danger);
 }
 .input:focus {
-  box-shadow: 0 0 0 #673de6;
-  border: 1.5px solid #673de6;
+  box-shadow: 0 0 0 var(--primary);
+  border: 1.5px solid var(--primary);
 }

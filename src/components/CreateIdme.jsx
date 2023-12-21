@@ -3,13 +3,13 @@ import Instruction, {
   Illustration,
   StyledNum,
   Text,
-} from "./Instruction";
+} from './Instruction';
 
 export default function CreateIDME() {
   return (
     <li>
       <Instruction>
-        <StyledNum>02</StyledNum>
+        <StyledNum>2</StyledNum>
         <Text>
           <p>
             Click and open <a href="#">this link</a> in a new tab, and click the
@@ -19,7 +19,7 @@ export default function CreateIDME() {
           <Checkbox />
         </Text>
       </Instruction>
-      <Illustration url={"assets/irs-signin.png"} />
+      <Illustration url={'assets/irs-signin.png'} />
     </li>
   );
 }

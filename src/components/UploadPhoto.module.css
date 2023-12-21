@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+}
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+.image {
+  width: 75%;
+  max-height: 500px;
+}
+.file {
+  display: none;
+}
+.custom {
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  padding: 4px 8px;
+  background-color: var(--primary);
+  color: var(--white);
+  display: inline-block;
+  cursor: pointer;
+}
+.text {
+  padding-bottom: 1em;
+  border-bottom: 2px solid var(--secondary);
+  margin-bottom: 1.5em;
+}

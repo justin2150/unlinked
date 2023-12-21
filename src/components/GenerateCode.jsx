@@ -3,13 +3,13 @@ import Instruction, {
   Illustration,
   StyledNum,
   Text,
-} from "./Instruction";
+} from './Instruction';
 
 export default function GenerateCode() {
   return (
     <li>
       <Instruction>
-        <StyledNum>07</StyledNum>
+        <StyledNum>7</StyledNum>
         <Text>
           <p>
             Enter a valid code on the Idme website from any of those being
@@ -19,7 +19,7 @@ export default function GenerateCode() {
         </Text>
         <Checkbox />
       </Instruction>
-      <Illustration url={"assets/idme-select-2fa.png"} />
+      <Illustration url={'assets/idme-select-2fa.png'} />
     </li>
   );
 }
