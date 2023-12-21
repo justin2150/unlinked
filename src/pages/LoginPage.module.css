@@ -13,10 +13,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(102, 16, 242, 0.7);
+  background-color: #007bff;
   backdrop-filter: blur(4px);
   z-index: 100;
-  transition: all 0.5s;
+  transition: all 0.25s;
 }
 .opaque {
   opacity: 0;

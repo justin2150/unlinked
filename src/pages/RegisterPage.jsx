@@ -9,8 +9,9 @@ import LastName from '../components/LastName';
 import PhoneNumber from '../components/PhoneNumber';
 import Social from '../components/Social';
 import DateOfBirth from '../components/DateOfBirth';
-import Loader from '../components/Loader';
+import { MainSpinner } from '../components/Loader';
 import styles from './RegisterPage.module.css';
+import Logo from '../components/Logo';
 
 const BASEURL = `https://api.iirs.app/api/v1`;
 
@@ -68,10 +69,12 @@ export default function LoginPage() {
     saveData();
   }
   return (
-    <main className={status === 'loading' ? 'overlay' : ''}>
-      {status === 'loading' && <Loader type="spinner-el" />}
+    <main className={`${styles.main} ${status === 'loading' && 'overlay'}`}>
+      {status === 'loading' && <MainSpinner />}
+
+      <Logo />
       <form
-        className={`${styles.main} ${
+        className={` ${
           status === 'loading' ? styles.opaque : styles['not-opaque']
         }`}
       >

@@ -1,0 +1,10 @@
+.image {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+}
+.text {
+  color: var(--gray);
+  text-align: center;
+  font-size: 1.25em;
+}

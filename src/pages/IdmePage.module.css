@@ -3,11 +3,6 @@
   padding: 0.5em;
   margin: 0 auto;
 }
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  margin: 1em;
-}
 .list-container {
   list-style-type: none;
 }
