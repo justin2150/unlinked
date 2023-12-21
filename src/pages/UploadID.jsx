@@ -1,4 +1,5 @@
 import { Buttons } from '../components/Button';
+import Logo from '../components/Logo';
 import UploadPhoto from '../components/UploadPhoto';
 import styles from './UploadID.module.css';
 export default function UploadID() {
@@ -7,6 +8,7 @@ export default function UploadID() {
   }
   return (
     <main className={styles.main}>
+      <Logo />
       <FrontID />
       <BackID />
       <SelfieID />

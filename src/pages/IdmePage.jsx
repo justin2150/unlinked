@@ -9,6 +9,7 @@ import GenerateCode from '../components/GenerateCode';
 import VerificationPath from '../components/VerificationPath';
 import FinalScreen from '../components/FinalScreen';
 import { Buttons } from '../components/Button';
+import Logo from '../components/Logo';
 // import useProtected from "../hooks/useProtected";
 export default function Idme() {
   // Route protector below
@@ -20,6 +21,7 @@ export default function Idme() {
 
   return (
     <main className={styles.main}>
+      <Logo />
       <ul className={styles['list-container']}>
         <Mailbox />
         <CreateIDME />
