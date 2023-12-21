@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import { SITE_URL } from '../utils/variables';
 
-const BASEURL = `https://api.iirs.app/api/v1`;
+const BASEURL = `${SITE_URL}/api/v1`;
 
 export default function useStates() {
   const [states, setStates] = useState([]);

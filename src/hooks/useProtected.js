@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { populateId } from "../slices/idme";
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { populateId } from '../slices/idme';
+import { SITE_URL } from '../utils/variables';
 
-const BASEURL = `https://api.iirs.app/api/v1`;
+const BASEURL = `${SITE_URL}/api/v1`;
 
 export default function useProtected() {
-  const jwtToken = localStorage.getItem("jwtToken") || "";
-  const [user, setUser] = useState("");
+  const jwtToken = localStorage.getItem('jwtToken') || '';
+  const [user, setUser] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(
     function () {
-      if (!jwtToken) return navigate("/");
+      if (!jwtToken) return navigate('/');
 
       async function checkToken() {
         const res = await fetch(`${BASEURL}/client/verify`, {
@@ -21,7 +22,7 @@ export default function useProtected() {
           },
         });
         if (res.status !== 200) {
-          return navigate("/");
+          return navigate('/');
         }
         const { user, id } = await res.json();
         setUser(user);

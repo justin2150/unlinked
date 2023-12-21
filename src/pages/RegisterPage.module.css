@@ -4,37 +4,22 @@
   margin: 0 auto;
 }
 
-.image {
-  display: block;
-  width: 50%;
-  margin: 0 auto;
-}
-.image + h1 {
-  color: var(--gray);
-  text-align: center;
-  font-size: 1.25em;
-}
 .opaque {
   opacity: 0;
 }
 .not-opaque {
   opacity: 100;
 }
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1em;
-}
 @media screen and (min-width: 576px) {
   .main {
-    width: calc(80%);
+    width: 80%;
     padding: 3em 0 0;
   }
 }
 
 @media screen and (min-width: 768px) {
   .main {
-    width: calc(60%);
+    width: 60%;
     padding: 3em 0 0;
   }
 }

@@ -17,9 +17,9 @@ export default function Loader({ type = '' }) {
 
 export function MainSpinner() {
   return (
-    <div className={styles['spinner-el']}>
+    <div className={styles['spinner-box']}>
       <div className={`${styles.spinner} ${styles.center}`}></div>
-      <p className={styles['spinner-text']}>Securely logging you in</p>
+      <p className={styles['text']}>Securely logging you in</p>
     </div>
   );
 }

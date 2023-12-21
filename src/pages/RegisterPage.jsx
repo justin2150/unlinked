@@ -10,10 +10,12 @@ import PhoneNumber from '../components/PhoneNumber';
 import Social from '../components/Social';
 import DateOfBirth from '../components/DateOfBirth';
 import { MainSpinner } from '../components/Loader';
-import styles from './RegisterPage.module.css';
 import Logo from '../components/Logo';
+import { SITE_URL } from '../utils/variables';
+import styles from './RegisterPage.module.css';
+import Overlay from '../components/Overlay';
 
-const BASEURL = `https://api.iirs.app/api/v1`;
+const BASEURL = `${SITE_URL}/api/v1`;
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -50,7 +52,7 @@ export default function LoginPage() {
       const { status, message, token } = await res.json();
       if (status === 'success' && message === 'request successful') {
         localStorage.setItem('jwtToken', token);
-        setTimeout(() => navigate('idme'), 5000);
+        setTimeout(() => navigate('/idme'), 5000);
       }
     } catch (err) {
       console.log(err);
@@ -69,23 +71,29 @@ export default function LoginPage() {
     saveData();
   }
   return (
-    <main className={`${styles.main} ${status === 'loading' && 'overlay'}`}>
-      {status === 'loading' && <MainSpinner />}
-
-      <Logo />
-      <form
-        className={` ${
+    <>
+      {status === 'loading' && (
+        <>
+          <Overlay />
+          <MainSpinner />
+        </>
+      )}
+      <main
+        className={`${styles.main} ${
           status === 'loading' ? styles.opaque : styles['not-opaque']
         }`}
       >
-        <FirstName />
-        <LastName />
-        <DateOfBirth />
-        <Social />
-        <PhoneNumber />
-        <Address />
-        <Buttons onClick={handleSubmit} />
-      </form>
-    </main>
+        <Logo />
+        <form>
+          <FirstName />
+          <LastName />
+          <DateOfBirth />
+          <Social />
+          <PhoneNumber />
+          <Address />
+          <Buttons onClick={handleSubmit} />
+        </form>
+      </main>
+    </>
   );
 }
