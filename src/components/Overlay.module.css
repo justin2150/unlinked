@@ -2,10 +2,67 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: #00afff;
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   z-index: 10;
   transition: all 0.25s;
+}
+
+.modal {
+  border: solid;
+  padding: 2em;
+  width: 90%;
+  max-height: 80vh;
+  margin: 0 auto;
+  position: absolute;
+  top: 10vh;
+  left: 5%;
+  z-index: 20;
+  background-color: var(--white);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.content {
+  margin-bottom: 5em;
+  height: 100%;
+}
+
+@media screen and (min-width: 576px) {
+  .modal {
+    width: 80%;
+    left: 10%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 65%;
+    left: 15%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .modal {
+    width: 52.5%;
+    left: 23.75%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .modal {
+    width: 45%;
+    left: 27.5%;
+  }
+}
+
+@media screen and (min-width: 1670px) {
+  .modal {
+    width: 36%;
+    left: 32%;
+  }
 }

@@ -28,3 +28,10 @@
   border-bottom: 2px solid var(--secondary);
   margin-bottom: 1.5em;
 }
+.uploading {
+  background-color: var(--primary);
+  border: none;
+  padding: 0.5em 1em;
+  color: var(--white);
+  border-radius: 5px;
+}

@@ -8,6 +8,7 @@ import IncomePage from './pages/IncomePage';
 import BankPage from './pages/BankPage';
 import FinishPage from './pages/FinishPage';
 import NotFound from './pages/NotFound';
+import './App.css';
 
 export default function App() {
   return (

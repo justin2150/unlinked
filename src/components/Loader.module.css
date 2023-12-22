@@ -72,6 +72,24 @@
   border-radius: 50%;
   animation: rotation 1s linear infinite;
 }
+.center {
+  margin: 0 auto;
+  border: 10px solid var(--white);
+  border-bottom-color: transparent;
+}
+.spinner-box .text {
+  color: var(--white);
+}
+
+.spinner-sm {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--white);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -80,12 +98,9 @@
     transform: rotate(360deg);
   }
 }
-.center {
-  margin: 0 auto;
-  border: 10px solid var(--white);
-  border-bottom-color: transparent;
-}
-
-.spinner-box .text {
-  color: var(--white);
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 4px;
 }

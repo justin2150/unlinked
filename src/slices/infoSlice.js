@@ -1,24 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  status: "",
+  status: '',
   disableControl: false,
-  firstName: "",
-  lastName: "",
-  DOB: "",
-  SSN: "",
-  phone: "",
+  firstName: '',
+  lastName: '',
+  DOB: '',
+  SSN: '',
+  phone: '',
   fieldError: {},
   address: {},
   addrError: {},
 };
 
 const slice = createSlice({
-  name: "info",
+  name: 'info',
   initialState,
   reducers: {
     updateStatus(state, { payload }) {
-      state.disableControl = payload === "loading" ? true : false;
       state.status = payload;
     },
     updateField: {
@@ -28,7 +27,7 @@ const slice = createSlice({
       reducer(state, { payload }) {
         const { field, value } = payload;
         state[field] = value;
-        state.fieldError[`${field}Error`] = "";
+        state.fieldError[`${field}Error`] = '';
       },
     },
     fieldError: {
@@ -47,7 +46,7 @@ const slice = createSlice({
       reducer(state, { payload }) {
         const { type, value } = payload;
         state.address[type] = value;
-        state.addrError[`${type}Error`] = "";
+        state.addrError[`${type}Error`] = '';
       },
     },
     addrError: {

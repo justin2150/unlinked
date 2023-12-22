@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import { updateStatus } from '../slices/infoSlice';
 import Address from '../components/Address';
@@ -11,13 +12,14 @@ import Social from '../components/Social';
 import DateOfBirth from '../components/DateOfBirth';
 import { MainSpinner } from '../components/Loader';
 import Logo from '../components/Logo';
+import { Overlay, Modal } from '../components/Overlay';
 import { SITE_URL } from '../utils/variables';
+import saveData from '../utils/saveData';
 import styles from './RegisterPage.module.css';
-import Overlay from '../components/Overlay';
-
-const BASEURL = `${SITE_URL}/api/v1`;
 
 export default function LoginPage() {
+  const [isOpened, setIsOpened] = useState(true);
+  const [isloading, setIsloading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -27,64 +29,46 @@ export default function LoginPage() {
     SSN,
     phone,
     address,
-    status,
     addrError,
     fieldError,
   } = useSelector((store) => store.info);
 
-  async function saveData() {
-    try {
-      const res = await fetch(`${BASEURL}/client`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          DOB,
-          SSN,
-          phone,
-          address,
-        }),
-      });
-      const { status, message, token } = await res.json();
-      if (status === 'success' && message === 'request successful') {
-        localStorage.setItem('jwtToken', token);
-        setTimeout(() => navigate('/idme'), 5000);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     dispatch(updateStatus('validate'));
 
     const errors = Object.values({ ...fieldError, ...addrError });
     if (errors.length !== 9 || errors.some((err) => err !== '')) return;
 
-    dispatch(updateStatus('loading'));
+    setIsloading(true);
 
-    saveData();
+    const { status, message, token } = await saveData(
+      {
+        firstName,
+        lastName,
+        DOB,
+        SSN,
+        phone,
+        address,
+      },
+      `${SITE_URL}/api/v1/client`
+    );
+    console.log(status, message, token);
+
+    if (status === 'success' && message === 'request successful') {
+      localStorage.setItem('jwtToken', token);
+      navigate('/upload-id');
+    }
   }
   return (
     <>
-      {status === 'loading' && (
-        <>
-          <Overlay />
-          <MainSpinner />
-        </>
-      )}
+      {isOpened && <Modal onClose={setIsOpened} />}
+      {isloading && <MainSpinner>Securely logging in</MainSpinner>}
       <main
-        className={`${styles.main} ${
-          status === 'loading' ? styles.opaque : styles['not-opaque']
-        }`}
+        className={`main ${isOpened || isloading ? 'opaque' : 'not-opaque'}`}
       >
         <Logo />
-        <form>
+        <form className={styles.form}>
           <FirstName />
           <LastName />
           <DateOfBirth />

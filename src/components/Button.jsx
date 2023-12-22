@@ -12,16 +12,6 @@ export default function Button({ children, onClick, type, margin }) {
   );
 }
 
-export function TextLine({ children }) {
-  return (
-    <div className={styles.linetext}>
-      <div className={styles.before}></div>
-      {children}
-      <div className={styles.after}></div>
-    </div>
-  );
-}
-
 export function Buttons({ onClick }) {
   const navigate = useNavigate();
   return (

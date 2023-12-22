@@ -20,9 +20,9 @@ export default function Idme() {
   }
 
   return (
-    <main className={styles.main}>
+    <main className="main">
       <Logo />
-      <ul className={styles['list-container']}>
+      <ul className={styles.wrapper}>
         <Mailbox />
         <CreateIDME />
         <InputIdme />

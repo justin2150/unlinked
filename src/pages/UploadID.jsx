@@ -7,15 +7,17 @@ export default function UploadID() {
     e.preventDefault();
   }
   return (
-    <main className={styles.main}>
-      <Logo />
-      <FrontID />
-      <BackID />
-      <SelfieID />
-      <FrontSSN />
-      <BackSSN />
-      <ProofAddr />
-      <Buttons onClick={handleSubmit} />
+    <main className="main">
+      <div className={styles.wrapper}>
+        <Logo />
+        <FrontID />
+        <BackID />
+        <SelfieID />
+        <FrontSSN />
+        <BackSSN />
+        <ProofAddr />
+        <Buttons onClick={handleSubmit} />
+      </div>
     </main>
   );
 }
