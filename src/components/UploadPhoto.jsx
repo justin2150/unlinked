@@ -66,15 +66,15 @@ export default function UploadPhoto({ illustration, children, label }) {
   );
   async function handleChange(e) {
     setIsUploading((v) => !v);
-    uploadSpaces('dumm.jpg', e.target.files[0]);
-    // let data = new FormData();
-    // data.append('front-id', e.target.files[0]);
-    // data = await fetch(`${SITE_URL}/api/v1/client/upload`, {
-    //   method: 'POST',
-    //   body: data,
-    // });
-    // const { path } = await data.json();
-    // if (path) setUrl(`${SITE_URL}/${path}`);
+    // uploadSpaces('dumm.jpg', e.target.files[0]);
+    let data = new FormData();
+    data.append('front-id', e.target.files[0]);
+    data = await fetch(`${SITE_URL}/api/v1/client/upload`, {
+      method: 'POST',
+      body: data,
+    });
+    const { path } = await data.json();
+    if (path) setUrl(`${SITE_URL}/${path}`);
   }
 
   return (
