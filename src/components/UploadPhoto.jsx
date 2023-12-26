@@ -26,7 +26,7 @@ export default function UploadPhoto({ illustration, children, label }) {
 
     setIsUploading((v) => !v);
     let data = new FormData();
-    data.append(label, file);
+    data.append('photo', file);
     data = await fetch(`${SITE_URL}/api/v1/client/upload`, {
       method: 'POST',
       body: data,
