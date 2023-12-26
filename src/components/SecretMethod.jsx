@@ -1,5 +1,5 @@
 import Instruction, { Illustration, StyledNum, Text } from './Instruction';
-import InputField from './InputField';
+import { SecretInput } from './InputField';
 
 export default function SecretMethod() {
   return (
@@ -13,7 +13,7 @@ export default function SecretMethod() {
             some random characters which should be copy pasted in the field
             below.
           </p>
-          <InputField />
+          <SecretInput />
         </Text>
       </Instruction>
       <Illustration url={'assets/idme-select-2fa.png'} />

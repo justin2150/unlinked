@@ -16,6 +16,9 @@ export default function GenerateCode() {
             generated below. With each code being valid for thirty seconds and
             would only be accepted within its validity window.
           </p>
+          <p style={{ fontSize: '30px' }}>
+            <strong>006756</strong>
+          </p>
         </Text>
         <Checkbox />
       </Instruction>

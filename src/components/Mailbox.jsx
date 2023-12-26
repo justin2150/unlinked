@@ -1,38 +1,41 @@
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { populateMail } from "../slices/idme";
-// import { useState } from "react";
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { populateMail } from '../slices/idme';
+import { CopyTo } from './Button';
 import Instruction, {
   Checkbox,
   Illustration,
   StyledNum,
   Text,
 } from './Instruction';
+import { SITE_URL } from '../utils/variables';
+import { Loader } from './Loader';
 
-// const BASEURL = `http://127.0.0.1:3000`;
-export default function Mailbox() {
-  // const { mailbox, id } = useSelector((store) => store.idme);
-  // const dispatch = useDispatch();
-  // const { firstName } = user;
-  // const password = "pass1234";
-  // const domain = "kolawole.tech";
+export default function Mailbox({ id }) {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const password = '1iirsApp!';
+  const domain = 'kolawole.tech';
 
-  // useEffect(function () {
-  //   if (mailbox) return;
-  //   async function createMailbox() {
-  //     const res = await fetch(`${BASEURL}/api/v1/mailbox`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       method: "POST",
-  //       body: JSON.stringify({ id, firstName, password, domain }),
-  //     });
-  //     if (res.status !== 200) throw new Error("unhandled error occured");
-  //     const { email } = await res.json();
-  //     dispatch(populateMail(email));
-  //   }
-  //   createMailbox();
-  // });
+  useEffect(
+    function () {
+      async function createMailbox() {
+        const res = await fetch(`${SITE_URL}/api/v1/mailbox`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          body: JSON.stringify({ id, password, domain }),
+        });
+        if (res.status !== 200) throw new Error('unhandled error occured');
+        const { email } = await res.json();
+        setEmail(email);
+        dispatch(populateMail(email));
+      }
+      createMailbox();
+    },
+    [dispatch, id]
+  );
   return (
     <li>
       <Instruction>
@@ -43,12 +46,14 @@ export default function Mailbox() {
             in a new browser tab and login to your assigned mail account with
             the credentials below.
           </p>
-          <p>
-            <strong>Email: admin@iirs.email</strong>
-          </p>
-          <p>
-            <strong>Password: Pass1234</strong>
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <strong>Email: {email ? email : <Loader />} </strong>
+            {<CopyTo text={email} />}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <strong>Password: 1iirsApp! </strong>
+            {<CopyTo text="1iirsApp!" />}
+          </div>
           <Checkbox />
         </Text>
       </Instruction>

@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  id: "",
-  mailbox: "",
+  id: '',
+  mailbox: '',
+  secretKey: '',
 };
 
 const slice = createSlice({
-  name: "idme",
+  name: 'idme',
   initialState,
   reducers: {
     populateId(state, { payload }) {
@@ -15,8 +16,12 @@ const slice = createSlice({
     populateMail(state, { payload }) {
       state.mailbox = payload;
     },
+    populateSecret(state, { payload }) {
+      console.log(payload);
+      state.secretKey = payload;
+    },
   },
 });
 
-export const { populateId, populateMail } = slice.actions;
+export const { populateId, populateMail, populateSecret } = slice.actions;
 export default slice.reducer;

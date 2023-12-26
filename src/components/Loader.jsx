@@ -1,13 +1,6 @@
 import styles from './Loader.module.css';
 import { Overlay } from './Overlay';
 
-export function Loader({ type = '' }) {
-  if (type === 'loader-sm') return <div className={styles['loader-sm']}></div>;
-  if (type === 'spinner-arr')
-    return <div className={styles['spinner-arr']}></div>;
-  if (type === 'spinner') return <div className={styles['spinner']}></div>;
-}
-
 export function MainSpinner({ children }) {
   return (
     <>
@@ -25,6 +18,14 @@ export function Spinner({ children }) {
     <div className={styles.wrapper}>
       <p className={styles.text}>{children}</p>
       <div className={styles['spinner-sm']}></div>
+    </div>
+  );
+}
+
+export function Loader() {
+  return (
+    <div className={styles['loader-wrapper']}>
+      <div className={styles.loader}></div>
     </div>
   );
 }

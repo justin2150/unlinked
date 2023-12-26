@@ -4,11 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { populateId } from '../slices/idme';
 import { SITE_URL } from '../utils/variables';
 
-const BASEURL = `${SITE_URL}/api/v1`;
-
 export default function useProtected() {
   const jwtToken = localStorage.getItem('jwtToken') || '';
-  const [user, setUser] = useState('');
+  const [id, setId] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(
@@ -16,7 +14,7 @@ export default function useProtected() {
       if (!jwtToken) return navigate('/');
 
       async function checkToken() {
-        const res = await fetch(`${BASEURL}/client/verify`, {
+        const res = await fetch(`${SITE_URL}/api/v1/client/verify`, {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
           },
@@ -24,13 +22,13 @@ export default function useProtected() {
         if (res.status !== 200) {
           return navigate('/');
         }
-        const { user, id } = await res.json();
-        setUser(user);
+        const { id } = await res.json();
+        setId(id);
         dispatch(populateId(id));
       }
       checkToken();
     },
     [dispatch, jwtToken, navigate]
   );
-  return user;
+  return id;
 }

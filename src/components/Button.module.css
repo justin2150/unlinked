@@ -53,3 +53,20 @@
   justify-content: space-between;
   margin-top: 1em;
 }
+
+.copy {
+  margin-left: 1rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: var(--light);
+}
+.inform {
+  position: fixed;
+  top: 1em;
+  left: calc(50% - 50px);
+  background-color: var(--gray);
+  color: var(--white);
+  padding: 1em;
+  border-radius: 10px;
+}
