@@ -33,7 +33,7 @@ export default function UploadPhoto({ illustration, children, label }) {
     });
     const { url } = await data.json();
     console.log(url);
-    if (url) setUrl(url);
+    if (url) setUrl;
   }
 
   return (
@@ -70,6 +70,7 @@ function FileInput({ label, onChange }) {
         className={styles.file}
         type="file"
         onChange={(e) => onChange(e)}
+        multiple={false}
       />
       <span>Choose file</span>
     </label>

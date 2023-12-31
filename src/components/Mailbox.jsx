@@ -15,7 +15,7 @@ export default function Mailbox({ id }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const password = '1iirsApp!';
-  const domain = 'kolawole.tech';
+  const domain = 'iirs.email';
 
   useEffect(
     function () {
