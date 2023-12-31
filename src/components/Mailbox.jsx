@@ -45,7 +45,13 @@ export default function Mailbox({ id }) {
         <Text>
           <p>
             Click and open the{' '}
-            <a href={`https://box.${MAILBOX_DOMAIN}/mail`}>link </a>
+            <a
+              target="_blank"
+              href={`https://box.${MAILBOX_DOMAIN}/mail`}
+              rel="noreferrer"
+            >
+              link{' '}
+            </a>
             in a new browser tab and login to your assigned mail account with
             the credentials below.
           </p>
