@@ -44,7 +44,8 @@ export default function Mailbox({ id }) {
         <StyledNum>1</StyledNum>
         <Text>
           <p>
-            Click and open the link <a href="#">https://box.iirs.email/mail </a>
+            Click and open the{' '}
+            <a href={`https://box.${MAILBOX_DOMAIN}/mail`}>link </a>
             in a new browser tab and login to your assigned mail account with
             the credentials below.
           </p>
