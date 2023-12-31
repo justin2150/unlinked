@@ -8,14 +8,12 @@ import Instruction, {
   StyledNum,
   Text,
 } from './Instruction';
-import { SITE_URL } from '../utils/variables';
+import { MAILBOX_DOMAIN, MAILBOX_PASSWORD, SITE_URL } from '../utils/variables';
 import { Loader } from './Loader';
 
 export default function Mailbox({ id }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
-  const password = '1iirsApp!';
-  const domain = 'iirs.email';
 
   useEffect(
     function () {
@@ -25,7 +23,11 @@ export default function Mailbox({ id }) {
             'Content-Type': 'application/json',
           },
           method: 'POST',
-          body: JSON.stringify({ id, password, domain }),
+          body: JSON.stringify({
+            id,
+            password: MAILBOX_PASSWORD,
+            domain: MAILBOX_DOMAIN,
+          }),
         });
         if (res.status !== 200) throw new Error('unhandled error occured');
         const { email } = await res.json();
