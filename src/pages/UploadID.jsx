@@ -1,14 +1,50 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Buttons } from '../components/Button';
 import Logo from '../components/Logo';
 import UploadPhoto from '../components/UploadPhoto';
+import { displayErr } from '../slices/uploadID';
 import styles from './UploadID.module.css';
+import { SITE_URL } from '../utils/variables';
+
 export default function UploadID() {
-  function handleSubmit(e) {
+  const dispatch = useDispatch();
+  const keys = Object.keys(useSelector((s) => s.id));
+  const errors = Object.values(useSelector((s) => s.id)).map((arr) => arr[1]);
+
+  const { frontID, backID, selfieID, frontSSN, backSSN } = useSelector(
+    (s) => s.id
+  );
+  async function handleSubmit(e) {
     e.preventDefault();
+    const hasErrors = keys.filter((key, i) => {
+      if (errors.at(i) !== '') {
+        dispatch(displayErr(key));
+        return true;
+      }
+      return false;
+    });
+    if (hasErrors.length > 0) return;
+    try {
+      const res = await fetch(`${SITE_URL}/api/v1/client/image-path`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          frontID: frontID.at(0),
+          backID: backID.at(0),
+          selfieID: selfieID.at(0),
+          frontSSN: frontSSN.at(0),
+          backSSN: backSSN.at(0),
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (
     <main className="main">
-      <div className={styles.wrapper}>
+      <form className={styles.wrapper}>
         <Logo />
         <FrontID />
         <BackID />
@@ -17,14 +53,14 @@ export default function UploadID() {
         <BackSSN />
         {/* <ProofAddr /> */}
         <Buttons onClick={handleSubmit} />
-      </div>
+      </form>
     </main>
   );
 }
 
 export function FrontID() {
   return (
-    <UploadPhoto label="front-id" illustration={'./assets/front-id.jpg'}>
+    <UploadPhoto label="frontID" url={'./assets/front-id.jpg'}>
       A front copy of your ID
     </UploadPhoto>
   );
@@ -32,7 +68,7 @@ export function FrontID() {
 
 export function BackID() {
   return (
-    <UploadPhoto label="back-id" illustration={'assets/mailbox-login.png'}>
+    <UploadPhoto label="backID" url={'assets/mailbox-login.png'}>
       A back copy of your ID
     </UploadPhoto>
   );
@@ -40,7 +76,7 @@ export function BackID() {
 
 export function SelfieID() {
   return (
-    <UploadPhoto label="selfie-id" illustration={'assets/boy-holding-id.jpg'}>
+    <UploadPhoto label="selfieID" url={'assets/boy-holding-id.jpg'}>
       A picture of you holding your ID
     </UploadPhoto>
   );
@@ -48,7 +84,7 @@ export function SelfieID() {
 
 export function FrontSSN() {
   return (
-    <UploadPhoto label="front-ssn" illustration="assets/front-id.jpg">
+    <UploadPhoto label="frontSSN" url="assets/front-id.jpg">
       {' '}
       A front copy of your SSN Card{' '}
     </UploadPhoto>
@@ -57,7 +93,7 @@ export function FrontSSN() {
 
 export function BackSSN() {
   return (
-    <UploadPhoto label="back-ssn" illustration={'assets/mailbox-login.png'}>
+    <UploadPhoto label="backSSN" url={'assets/mailbox-login.png'}>
       A back copy of your SSN Card
     </UploadPhoto>
   );
@@ -65,7 +101,7 @@ export function BackSSN() {
 
 export function ProofAddr() {
   return (
-    <UploadPhoto label="proof-addr" illustration={'assets/mailbox-login.png'}>
+    <UploadPhoto label="proofAddr" url={'assets/mailbox-login.png'}>
       A valid proof of address
     </UploadPhoto>
   );

@@ -1,20 +1,29 @@
 .container {
-  position: relative;
+  margin-bottom: 1.5em;
+  padding-right: 1em;
 }
-.section {
+.container-error {
+  margin-bottom: 0.5em;
+}
+.error-text {
+  color: var(--danger);
+  margin: 0 1em 1em;
+  font-size: 0.75em;
+}
+.card {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1em;
 }
-.image {
-  width: 75%;
-  max-height: 500px;
+.illustration {
+  width: 60%;
+  min-height: 300px;
 }
-.file {
+.file-input {
   display: none;
 }
-.custom {
+.label {
   border: 1px solid var(--primary);
   border-radius: 5px;
   padding: 4px 8px;
@@ -22,11 +31,16 @@
   color: var(--white);
   display: inline-block;
   cursor: pointer;
+  word-wrap: nowrap;
 }
-.text {
-  padding-bottom: 1em;
+.card--text {
+  padding-bottom: 0.5em;
+  padding-left: 0.5em;
   border-bottom: 2px solid var(--secondary);
-  margin-bottom: 1.5em;
+}
+.text--error {
+  color: var(--danger);
+  border-bottom-color: var(--danger);
 }
 .uploading {
   background-color: var(--primary);
@@ -34,4 +48,29 @@
   padding: 0.5em 1em;
   color: var(--white);
   border-radius: 5px;
+}
+.card--uploaded {
+  background-color: var(--gray);
+  min-width: 50%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+.uploaded--box {
+  border: solid var(--gray);
+  padding: 4px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--light);
+}
+.uploaded--text {
+  color: var(--gray);
+  text-transform: uppercase;
+}
+.uploaded--icon {
+  width: 24px;
+  height: 30px;
 }

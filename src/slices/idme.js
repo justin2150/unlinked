@@ -17,7 +17,6 @@ const slice = createSlice({
       state.mailbox = payload;
     },
     populateSecret(state, { payload }) {
-      console.log(payload);
       state.secretKey = payload;
     },
   },

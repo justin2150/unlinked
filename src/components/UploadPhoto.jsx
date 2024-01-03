@@ -1,59 +1,75 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { SITE_URL } from '../utils/variables';
 import { Spinner } from './Loader';
 import styles from './UploadPhoto.module.css';
+import { populatePhoto } from '../slices/uploadID';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function UploadPhoto({ illustration, children, label }) {
-  const [url, setUrl] = useState(() => illustration);
-  const [isUploading, setIsUploading] = useState(false);
-  const image = useRef(null);
+export default function UploadPhoto({ url, children, label }) {
+  const [status, setStatus] = useState('idle');
+  const dispatch = useDispatch();
+  const displayErr = useSelector((store) => store.id[label].at(2));
 
-  useEffect(
-    function () {
-      if (!isUploading || url === illustration) return;
-
-      const handler = () => setIsUploading(false);
-      // WAS FORCED BY VSCODE TO CREATE A COPY OF THE REF
-      const refCopy = image.current;
-
-      image.current.addEventListener('load', handler);
-      return () => refCopy.removeEventListener('load', handler);
-    },
-    [illustration, isUploading, url]
-  );
   async function handleChange(e) {
     const file = e.target.files[0];
 
-    setIsUploading((v) => !v);
+    setStatus('uploading');
     let data = new FormData();
     data.append('photo', file);
-    data = await fetch(`${SITE_URL}/api/v1/client/upload`, {
+    data = await fetch(`${SITE_URL}/api/v1/client/image`, {
       method: 'POST',
       body: data,
     });
-    const { url } = await data.json();
-    console.log(url);
-    if (url) setUrl;
+    const { path } = await data.json();
+    if (path) {
+      setStatus('uploaded');
+      dispatch(populatePhoto(label, path));
+    }
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.section}>
-        <img className={styles.image} src={url} ref={image} />
-        {/* <embed
-          src={`${SITE_URL}/uploads/1703257944005.pdf`}
-          type="application/pdf"
-        /> */}
-        {isUploading ? (
-          <div className={styles.uploading}>
-            <Spinner>uploading</Spinner>{' '}
-          </div>
-        ) : (
-          <FileInput label={label} onChange={handleChange} />
-        )}
+    <>
+      <div
+        className={`${styles.container} ${
+          displayErr ? styles['container-error'] : ''
+        }`}
+      >
+        <div className={styles.card}>
+          {status === 'idle' && (
+            <>
+              <Illustration url={url} label={label} />
+              <Label label={label}>choose file</Label>
+              <FileInput label={label} onChange={handleChange} />
+            </>
+          )}
+          {status === 'uploading' && (
+            <>
+              <Illustration url={url} label={label} />
+              <Loader>uploading</Loader>
+            </>
+          )}
+          {status === 'uploaded' && (
+            <>
+              <Uploaded />
+              <Label label={label}>choose new file</Label>
+              <FileInput label={label} onChange={handleChange} />
+            </>
+          )}
+        </div>
+        <p
+          className={`${styles['card--text']} ${
+            displayErr ? styles['text--error'] : ''
+          }`}
+        >
+          {children}{' '}
+        </p>
       </div>
-      <p className={styles.text}>{children} </p>
-    </div>
+      {displayErr && (
+        <p className={displayErr ? styles['error-text'] : ''}>
+          This photo is required
+        </p>
+      )}
+    </>
   );
 }
 
@@ -61,18 +77,50 @@ export default function UploadPhoto({ illustration, children, label }) {
 
 // }
 
+function Illustration({ url, label }) {
+  return <img alt={label} className={styles.illustration} src={url} />;
+}
+
 function FileInput({ label, onChange }) {
   return (
-    <label htmlFor={label} className={styles.custom}>
-      <input
-        id={label}
-        name={label}
-        className={styles.file}
-        type="file"
-        onChange={(e) => onChange(e)}
-        multiple={false}
-      />
-      <span>Choose file</span>
+    <input
+      id={label}
+      name={label}
+      className={styles['file-input']}
+      type="file"
+      onChange={(e) => onChange(e)}
+      multiple={false}
+    />
+  );
+}
+
+function Label({ label, children }) {
+  return (
+    <label htmlFor={label} className={styles.label}>
+      <span>{children}</span>
     </label>
+  );
+}
+
+function Loader({ children }) {
+  return (
+    <div className={styles.uploading}>
+      <Spinner>{children}</Spinner>{' '}
+    </div>
+  );
+}
+
+function Uploaded() {
+  return (
+    <div className={styles['card--uploaded']}>
+      <div className={styles['uploaded--box']}>
+        <p className={styles['uploaded--text']}>Uploaded</p>
+        <img
+          className={styles['uploaded--icon']}
+          alt="success"
+          src="check.svg"
+        />
+      </div>
+    </div>
   );
 }
