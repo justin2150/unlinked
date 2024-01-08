@@ -61,7 +61,7 @@ function City({ curSug }) {
     function () {
       if (status !== 'validate') return;
       if (address.city === undefined || address.city === '')
-        dispatch(addrError('city', 'This field is required'));
+        dispatch(addrError('city', 'Required'));
     },
     [address.city, dispatch, status]
   );

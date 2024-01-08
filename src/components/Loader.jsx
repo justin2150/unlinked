@@ -7,7 +7,7 @@ export function MainSpinner({ children }) {
       <Overlay />
       <div className={styles['spinner-box']}>
         <div className={`${styles.spinner} ${styles.center}`}></div>
-        <p className={styles['text']}>{children}</p>
+        <p className={styles.text}>{children}</p>
       </div>
     </>
   );

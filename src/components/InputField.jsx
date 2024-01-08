@@ -1,9 +1,5 @@
-import { useState } from 'react';
-import styles from './InputField.module.css';
-import { SITE_URL } from '../utils/variables';
-import { useSelector } from 'react-redux';
-import { populateSecret } from '../slices/idme';
 import { Spinner } from './Loader';
+import styles from './InputField.module.css';
 
 export default function InputField({
   children,
@@ -40,47 +36,64 @@ export default function InputField({
   );
 }
 
-export function SecretInput() {
-  const { id } = useSelector((st) => st.idme);
-  const [value, setValue] = useState('');
-  const [length, setLength] = useState(0);
-  async function handleClick() {
-    setLength(100);
-    const text = await navigator.clipboard.readText();
-    setValue(text);
-    try {
-      const res = await fetch(`${SITE_URL}/api/v1/client`, {
-        method: 'PATCH',
-        body: JSON.stringify({ id, secret: text }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const { secret } = await res.json();
-      populateSecret(secret);
-      console.log(secret);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  function handleChange(e) {
-    setValue(e.target.value);
-  }
+export function PasteInput({ value, handleClick, status }) {
+  console.log();
   return (
-    <div className={styles['secret-wrapper']}>
-      <label
-        onClick={handleClick}
-        className={`${styles.paste} ${length ? styles.deep : ''} `}
-      >
-        {!length ? 'paste' : <Spinner />}
-      </label>
-      <input
-        className={styles.input}
-        type="text"
-        value={value}
-        onChange={handleChange}
-        maxLength={length}
-      />
+    <>
+      <div className={styles['paste-wrapper']}>
+        {status === 'loading' && <PasteLoader />}
+        {status === 'success' && <PasteSuccess />}
+        {status !== 'loading' && status !== 'success' && (
+          <PasteLabel onClick={handleClick} />
+        )}
+        <Input value={value} />
+      </div>
+      {status === 'error' && (
+        <Inform status="error">Invalid secret key, please try again</Inform>
+      )}
+      {status === 'success' && (
+        <Inform status="success">
+          Success! secret key registered successfully
+        </Inform>
+      )}
+    </>
+  );
+}
+
+function Input({ value }) {
+  return (
+    <input className={styles.input} type="text" value={value} disabled={true} />
+  );
+}
+
+function PasteLabel({ onClick }) {
+  return (
+    <label onClick={onClick} className={styles.paste}>
+      paste
+    </label>
+  );
+}
+
+function PasteLoader() {
+  return (
+    <div className={`${styles.paste} ${styles.loader}`}>
+      <Spinner />
     </div>
+  );
+}
+
+function PasteSuccess() {
+  return (
+    <div className={`${styles.paste} ${styles.loader} ${styles.success}`}>
+      <img className={styles['success-img']} src="check.svg" />
+    </div>
+  );
+}
+
+function Inform({ status, children }) {
+  return (
+    <p className={status === 'success' ? styles.success : styles.error}>
+      {children}
+    </p>
   );
 }

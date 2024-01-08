@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  id: '',
+  id: '65990b48c8cd9c442bf13231',
   mailbox: '',
-  secretKey: '',
+  secret: '',
 };
 
 const slice = createSlice({
@@ -17,7 +17,8 @@ const slice = createSlice({
       state.mailbox = payload;
     },
     populateSecret(state, { payload }) {
-      state.secretKey = payload;
+      state.secret = payload;
+      console.log(payload);
     },
   },
 });

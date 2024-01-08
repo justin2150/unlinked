@@ -1,0 +1,8 @@
+.mailbox {
+  display: flex;
+  align-items: center;
+}
+.password {
+  display: flex;
+  align-items: center;
+}

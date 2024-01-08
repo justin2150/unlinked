@@ -1,0 +1,39 @@
+.display-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1em 0;
+  width: 100%;
+  padding-right: 1em;
+}
+.display-code .text {
+  font-size: 3em;
+  color: var(--gray);
+}
+.info-text {
+  width: 100%;
+  text-align: center;
+  border: solid var(--light);
+  border-radius: 5px;
+  background-color: var(--light);
+  color: var(--gray);
+  padding: 1em;
+  margin-top: 1em;
+}
+.circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content {
+  text-align: center;
+  display: block;
+  color: var(--gray);
+  border-radius: 50%;
+  background-color: var(--white);
+  font-size: 1.25em;
+}
