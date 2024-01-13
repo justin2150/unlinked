@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import useScrollIntoview from '../hooks/scrollView';
 import styles from './GenerateCode.module.css';
 
-const { totp } = window.otplib;
+const { authenticator } = window.otplib;
 
 export default function GenerateCode() {
   const { secret } = useSelector((st) => st.idme);
@@ -16,8 +16,9 @@ export default function GenerateCode() {
   useScrollIntoview(secret, listEl);
 
   const resetCode = useCallback(() => {
-    setToken(totp.generate(secret));
-    setRunIn(totp.timeRemaining());
+    setToken(authenticator.generate(secret));
+    // setToken(totp.generate(secret));
+    setRunIn(authenticator.timeRemaining());
   }, [secret]);
 
   useEffect(
