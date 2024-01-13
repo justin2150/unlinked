@@ -4,8 +4,8 @@ const initialState = {
   frontID: ['', 'This photo is required', false],
   backID: ['', 'This photo is required', false],
   selfieID: ['', 'This photo is required', false],
-  frontSSN: ['', 'This photo is required', false],
-  backSSN: ['', 'This photo is required', false],
+  // frontSSN: ['', 'This photo is required', false],
+  // backSSN: ['', 'This photo is required', false],
   // proofAddr: ['', 'This file is required', false],
 };
 

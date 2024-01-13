@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { populateId } from '../slices/idme';
@@ -6,7 +6,6 @@ import { SITE_URL } from '../utils/variables';
 
 export default function useProtected() {
   const jwtToken = localStorage.getItem('jwtToken') || '';
-  const [id, setId] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(
@@ -23,12 +22,10 @@ export default function useProtected() {
           return navigate('/');
         }
         const { id } = await res.json();
-        setId(id);
         dispatch(populateId(id));
       }
       checkToken();
     },
     [dispatch, jwtToken, navigate]
   );
-  return id;
 }

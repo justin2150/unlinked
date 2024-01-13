@@ -4,16 +4,24 @@ import Logo from '../components/Logo';
 import UploadPhoto from '../components/UploadPhoto';
 import { displayErr } from '../slices/uploadID';
 import styles from './UploadID.module.css';
-import { SITE_URL } from '../utils/variables';
+import { saveImagePath } from '../utils/saveData';
+import { useNavigate } from 'react-router-dom';
+import useProtected from '../hooks/useProtected';
 
 export default function UploadID() {
+  // Route protector below
+  useProtected();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const keys = Object.keys(useSelector((s) => s.id));
   const errors = Object.values(useSelector((s) => s.id)).map((arr) => arr[1]);
 
-  const { frontID, backID, selfieID, frontSSN, backSSN } = useSelector(
-    (s) => s.id
-  );
+  // const { frontID, backID, selfieID, frontSSN, backSSN } = useSelector(
+  //   (s) => s.id
+  // );
+  const { frontID, backID, selfieID } = useSelector((s) => s.id);
+  const { id } = useSelector((st) => st.idme);
+
   async function handleSubmit(e) {
     e.preventDefault();
     const hasErrors = keys.filter((key, i) => {
@@ -24,23 +32,16 @@ export default function UploadID() {
       return false;
     });
     if (hasErrors.length > 0) return;
-    try {
-      const res = await fetch(`${SITE_URL}/api/v1/client/image-path`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          frontID: frontID.at(0),
-          backID: backID.at(0),
-          selfieID: selfieID.at(0),
-          frontSSN: frontSSN.at(0),
-          backSSN: backSSN.at(0),
-        }),
-      });
-      const data = await res.json();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
+    const status = await saveImagePath(
+      id,
+      frontID.at(0),
+      backID.at(0),
+      selfieID.at(0)
+    );
+    console.log(status);
+    // Handle error later
+    if (status !== 'success') return;
+    navigate('/idme');
   }
   return (
     <main className="main">
@@ -49,8 +50,8 @@ export default function UploadID() {
         <FrontID />
         <BackID />
         <SelfieID />
-        <FrontSSN />
-        <BackSSN />
+        {/* <FrontSSN />
+        <BackSSN /> */}
         {/* <ProofAddr /> */}
         <Buttons onClick={handleSubmit} />
       </form>
@@ -68,7 +69,7 @@ export function FrontID() {
 
 export function BackID() {
   return (
-    <UploadPhoto label="backID" url={'assets/mailbox-login.png'}>
+    <UploadPhoto label="backID" url={'assets/back-id.jpg'}>
       A back copy of your ID
     </UploadPhoto>
   );

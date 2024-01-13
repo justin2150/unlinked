@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  id: '65990b48c8cd9c442bf13231',
+  id: '',
   mailbox: '',
   secret: '',
 };

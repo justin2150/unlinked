@@ -3,7 +3,7 @@ import { PasteInput } from './InputField';
 import { populateSecret } from '../slices/idme';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { saveSecret } from '../utils/saveSecret';
+import { saveSecret } from '../utils/saveData';
 
 export default function SecretMethod() {
   return (

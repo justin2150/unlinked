@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Instruction, { Illustration, StyledNum, Text } from './Instruction';
 import { useSelector } from 'react-redux';
-import styles from './GenerateCode.module.css';
 import useScrollIntoview from '../hooks/scrollView';
+import styles from './GenerateCode.module.css';
 
 const { totp } = window.otplib;
 
@@ -64,7 +64,9 @@ export default function GenerateCode() {
 function DisplayCode({ token, runIn }) {
   return (
     <div className={styles['display-code']}>
-      <p className={styles.text}>{`${token.slice(0, 3)}-${token.slice(-3)}`}</p>
+      <p className={styles.text}>
+        {`${token.slice(0, 3)}-${token.slice(-3)}`}{' '}
+      </p>
       <Circular runIn={runIn} />
     </div>
   );
@@ -73,7 +75,11 @@ export function Circular({ runIn }) {
   return (
     <>
       <div className={styles.circle}>
-        <span className={styles.content}>
+        <span
+          className={`${styles.content} ${
+            runIn < 10 ? styles['content--red'] : ''
+          }`}
+        >
           {runIn < 10 ? `0${runIn}` : runIn}
         </span>
       </div>

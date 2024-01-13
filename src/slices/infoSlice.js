@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   status: '',
-  disableControl: false,
   firstName: '',
   lastName: '',
   DOB: '',

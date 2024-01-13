@@ -1,3 +1,4 @@
+import useProtected from '../hooks/useProtected';
 import Mailbox from '../components/Mailbox';
 import InputIdme from '../components/InputIdme';
 import SecretMethod from '../components/SecretMethod';
@@ -11,13 +12,16 @@ import Instruction, {
   Text,
 } from '../components/Instruction';
 import styles from './IdmePage.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Idme() {
   // Route protector below
-  // const id = useProtected();
+  useProtected();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
+    navigate('/finish');
   }
 
   return (
