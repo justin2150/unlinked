@@ -24,7 +24,7 @@ export default function IndexPage() {
         <Button onClick={() => delayNavigate('/register')} type="primary">
           Begin a new application
         </Button>
-        {isHidden && (
+        {!isHidden && (
           <>
             <TextLine>OR</TextLine>
             <Button onClick={() => delayNavigate('/login')} type="primary">
