@@ -13,6 +13,7 @@ import Instruction, {
 } from '../components/Instruction';
 import styles from './IdmePage.module.css';
 import { useNavigate } from 'react-router-dom';
+import { IDME_URL } from '../utils/variables';
 
 export default function Idme() {
   // Route protector below
@@ -71,9 +72,9 @@ export function CreateIDME() {
         <StyledNum>2</StyledNum>
         <Text>
           <p>
-            Click and open <a href="#">this link</a> in a new tab, and click the
-            create account option to begin the process of verifying your
-            identity
+            Click and open <a href={IDME_URL}>this link</a> in a new tab, and
+            click the create account option to begin the process of verifying
+            your identity
           </p>
           <Checkbox />
         </Text>

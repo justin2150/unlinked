@@ -15,7 +15,7 @@ export default function InputIdme() {
       <Instruction>
         <StyledNum>3</StyledNum>
         <Text>
-          <p>Enter the details below in the corresponding field.</p>
+          <p>Register with the details below.</p>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <strong>Email: {email ? email : <Loader />} </strong>
             {<CopyTo text={email} />}
