@@ -1,35 +1,31 @@
-import { useSelector } from "react-redux";
-import styles from "./SelectField.module.css";
+import styles from './SelectField.module.css';
 
 export default function SelectField({
   children,
-  flex = "",
+  flex = '',
   onChange,
   value,
   isFocus,
   setIsFocus,
-  error = "",
-  data = [],
+  error = '',
+  data,
 }) {
-  const { disableControl } = useSelector((store) => store.info);
-
   return (
     <div className={`${styles.wrapper} ${styles[flex]}`}>
       <label
-        className={`${styles.label} ${isFocus ? styles["label-focus"] : ""} ${
-          error ? styles["label-error"] : ""
+        className={`${styles.label} ${isFocus ? styles['label-focus'] : ''} ${
+          error ? styles['label-error'] : ''
         }`}
       >
         {children}
       </label>
       <select
-        className={`${styles.select} ${error ? styles["input-error"] : ""}`}
+        className={`${styles.select} ${error ? styles['input-error'] : ''}`}
         value={value}
         onChange={onChange}
-        disabled={disableControl}
         onFocus={() => setIsFocus(true)}
         onBlur={() => {
-          value === "" && setIsFocus(false);
+          value === '' && setIsFocus(false);
         }}
       >
         <option value=""></option>
@@ -39,7 +35,7 @@ export default function SelectField({
           </option>
         ))}
       </select>
-      {error && <p className={styles["text-error"]}>{error}</p>}
+      {error && <p className={styles['text-error']}>{error}</p>}
     </div>
   );
 }
