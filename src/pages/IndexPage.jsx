@@ -11,7 +11,6 @@ export default function IndexPage() {
   const navigate = useNavigate();
 
   console.log(document.referrer);
-  console.log(window.history.state);
 
   function handleNavigate() {}
 
