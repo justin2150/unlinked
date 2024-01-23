@@ -7,10 +7,13 @@ import styles from './UploadID.module.css';
 import { saveImagePath } from '../utils/saveData';
 import { useNavigate } from 'react-router-dom';
 import useProtected from '../hooks/useProtected';
+import { Modal } from '../components/Overlay';
+import { useState } from 'react';
 
 export default function UploadID() {
   // Route protector below
   useProtected();
+  const [isOpen, setIsOpen] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const keys = Object.keys(useSelector((s) => s.id));
@@ -41,16 +44,19 @@ export default function UploadID() {
     navigate('/idme');
   }
   return (
-    <main className="main">
-      <form className={styles.wrapper}>
-        <Logo />
-        <FrontID />
-        <BackID />
-        <SelfieID />
-        {/* <ProofAddr /> */}
-        <Buttons onClick={handleSubmit} />
-      </form>
-    </main>
+    <>
+      {isOpen && <ModalInstruction onClose={setIsOpen} />}
+      <main className="main">
+        <form className={styles.wrapper}>
+          <Logo />
+          <FrontID />
+          <BackID />
+          <SelfieID />
+          {/* <ProofAddr /> */}
+          <Buttons onClick={handleSubmit} />
+        </form>
+      </main>
+    </>
   );
 }
 
@@ -83,5 +89,17 @@ export function ProofAddr() {
     <UploadPhoto label="proofAddr" url={'assets/mailbox-login.png'}>
       A valid proof of address
     </UploadPhoto>
+  );
+}
+
+function ModalInstruction({ onClose }) {
+  return (
+    <Modal onClose={onClose}>
+      <h2>Provide means of Identification</h2>
+      <p>
+        For every images, you need to provide a clear copy of the image taken
+        against a dark background in a well lit enviroment.
+      </p>
+    </Modal>
   );
 }

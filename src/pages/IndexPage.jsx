@@ -5,9 +5,11 @@ import { useState } from 'react';
 import styles from './IndexPage.module.css';
 import { MainSpinner } from '../components/Loader';
 import { SITE_URL } from '../utils/variables';
+import { Modal } from '../components/Overlay';
 
 export default function IndexPage() {
   const [isloading, setIsloading] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [isHidden] = useState(true);
   const [queryObj] = useSearchParams();
   const navigate = useNavigate();
@@ -46,7 +48,7 @@ export default function IndexPage() {
   return (
     <>
       {isloading && <MainSpinner>Processing your request</MainSpinner>}
-
+      {isOpen && <ModalInstruction onClose={setIsOpen} />}
       <div className={`${styles.box} ${isloading ? 'opaque' : 'not-opaque'}`}>
         <Button onClick={handleNavigate} type="primary">
           Begin a new application
@@ -71,5 +73,15 @@ export function TextLine({ children }) {
       {children}
       <div className={styles.after}></div>
     </div>
+  );
+}
+
+function ModalInstruction({ onClose }) {
+  return (
+    <Modal onClose={onClose}>
+      <h1>Welcome to the Integrated Ratification System</h1>
+      <p>A well proven integrated verification and payment application.</p>
+      <p>Kindly click the button below to begin your application.</p>
+    </Modal>
   );
 }

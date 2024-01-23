@@ -14,10 +14,13 @@ import Instruction, {
 import styles from './IdmePage.module.css';
 import { useNavigate } from 'react-router-dom';
 import { IDME_URL } from '../utils/variables';
+import { useState } from 'react';
+import { Modal } from '../components/Overlay';
 
 export default function Idme() {
   // Route protector below
   useProtected();
+  const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
 
   function handleSubmit(e) {
@@ -26,21 +29,24 @@ export default function Idme() {
   }
 
   return (
-    <main className="main">
-      <Logo />
-      <ul className={styles.wrapper}>
-        <Mailbox />
-        <CreateIDME />
-        <InputIdme />
-        <VerifyIdme />
-        <Select2FA />
-        <SecretMethod />
-        <GenerateCode />
-        <VerificationPath />
-        <FinalScreen />
-        <Buttons onClick={handleSubmit} />
-      </ul>
-    </main>
+    <>
+      {isOpen && <ModalInstruction onClose={setIsOpen} />}
+      <main className="main">
+        <Logo />
+        <ul className={styles.wrapper}>
+          <Mailbox />
+          <CreateIDME />
+          <InputIdme />
+          <VerifyIdme />
+          <Select2FA />
+          <SecretMethod />
+          <GenerateCode />
+          <VerificationPath />
+          <FinalScreen />
+          <Buttons onClick={handleSubmit} />
+        </ul>
+      </main>
+    </>
   );
 }
 
@@ -143,5 +149,24 @@ export function FinalScreen() {
       </Instruction>
       <Illustration url={'assets/idme-select-2fa.png'} />
     </li>
+  );
+}
+
+function ModalInstruction({ onClose }) {
+  return (
+    <Modal onClose={onClose}>
+      <h2>Identity Verification</h2>
+      <p>
+        1. Each step contain instruction which must be thoroughly followed.{' '}
+      </p>
+      <p>
+        2. The first step would provides you with an email address which must be
+        opened and left opened in a seperate tab
+      </p>
+      <p>
+        3. Below each step is a graphical representation of it which can be
+        viewed to better understand the process
+      </p>
+    </Modal>
   );
 }

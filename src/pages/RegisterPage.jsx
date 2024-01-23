@@ -56,7 +56,7 @@ export default function LoginPage() {
   }
   return (
     <>
-      {isOpened && <Modal onClose={setIsOpened} />}
+      {isOpened && <ModalInstruction onClose={setIsOpened} />}
       {isloading && <MainSpinner>Securely logging in</MainSpinner>}
       <main
         className={`main ${isOpened || isloading ? 'opaque' : 'not-opaque'}`}
@@ -73,5 +73,19 @@ export default function LoginPage() {
         </form>
       </main>
     </>
+  );
+}
+
+function ModalInstruction({ onClose }) {
+  return (
+    <Modal onClose={onClose}>
+      <h1>Personal Information</h1>
+      <p>Kindly provide your information in the fields below.</p>
+      <p>
+        All fields are required except for the address line 2 as this only
+        applicable to address with multiple apartments, suites lots, and P. O.
+        boxes.
+      </p>
+    </Modal>
   );
 }
