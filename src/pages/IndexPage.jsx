@@ -17,10 +17,7 @@ export default function IndexPage() {
   async function handleNavigate() {
     // 1) Obtain referral url and refferal
     let s = document.referrer;
-    if (s)
-      s = new URL(document.referrer).hostname
-        .replace('www.', '')
-        .replace('app.', '');
+    if (s) s = new URL(document.referrer).hostname;
     let ref = queryObj.get('ref');
     console.log(ref, s);
 
@@ -39,6 +36,7 @@ export default function IndexPage() {
   return (
     <>
       {isloading && <MainSpinner>Processing your request</MainSpinner>}
+
       <div className={`${styles.box} ${isloading ? 'opaque' : 'not-opaque'}`}>
         <Button onClick={handleNavigate} type="primary">
           Begin a new application
