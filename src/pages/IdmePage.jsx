@@ -72,9 +72,12 @@ export function CreateIDME() {
         <StyledNum>2</StyledNum>
         <Text>
           <p>
-            Click and open <a href={IDME_URL}>this link</a> in a new tab, and
-            click the create account option to begin the process of verifying
-            your identity
+            Click and open{' '}
+            <a target="_blank" href={IDME_URL} rel="noreferrer">
+              this link
+            </a>{' '}
+            in a new tab, and click the create account option to begin the
+            process of verifying your identity
           </p>
           <Checkbox />
         </Text>

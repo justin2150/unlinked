@@ -10,6 +10,11 @@ export default function IndexPage() {
   const [isHidden] = useState(true);
   const navigate = useNavigate();
 
+  console.log(document.referrer);
+  console.log(window.history.state);
+
+  function handleNavigate() {}
+
   function delayNavigate(path) {
     setIsloading(true);
     setTimeout(() => {
@@ -28,7 +33,7 @@ export default function IndexPage() {
           <>
             <TextLine>OR</TextLine>
             <Button onClick={() => delayNavigate('/login')} type="primary">
-              Proceed with an existing application
+              Proceed with an existing one
             </Button>
           </>
         )}
