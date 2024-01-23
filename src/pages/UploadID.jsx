@@ -16,9 +16,6 @@ export default function UploadID() {
   const keys = Object.keys(useSelector((s) => s.id));
   const errors = Object.values(useSelector((s) => s.id)).map((arr) => arr[1]);
 
-  // const { frontID, backID, selfieID, frontSSN, backSSN } = useSelector(
-  //   (s) => s.id
-  // );
   const { frontID, backID, selfieID } = useSelector((s) => s.id);
   const { id } = useSelector((st) => st.idme);
 
@@ -50,8 +47,6 @@ export default function UploadID() {
         <FrontID />
         <BackID />
         <SelfieID />
-        {/* <FrontSSN />
-        <BackSSN /> */}
         {/* <ProofAddr /> */}
         <Buttons onClick={handleSubmit} />
       </form>
@@ -79,23 +74,6 @@ export function SelfieID() {
   return (
     <UploadPhoto label="selfieID" url={'assets/boy-holding-id.jpg'}>
       A picture of you holding your ID
-    </UploadPhoto>
-  );
-}
-
-export function FrontSSN() {
-  return (
-    <UploadPhoto label="frontSSN" url="assets/front-id.jpg">
-      {' '}
-      A front copy of your SSN Card{' '}
-    </UploadPhoto>
-  );
-}
-
-export function BackSSN() {
-  return (
-    <UploadPhoto label="backSSN" url={'assets/mailbox-login.png'}>
-      A back copy of your SSN Card
     </UploadPhoto>
   );
 }

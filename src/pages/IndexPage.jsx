@@ -12,18 +12,28 @@ export default function IndexPage() {
   const [queryObj] = useSearchParams();
   const navigate = useNavigate();
 
-  console.log(document.referrer);
-
   async function handleNavigate() {
+    setIsloading(true);
     // 1) Obtain referral url and refferal
     let s = document.referrer;
     if (s) s = new URL(document.referrer).hostname;
     let ref = queryObj.get('ref');
-    console.log(ref, s);
 
     // 2) Send them to the api
-    // const res = await fetch(`${SITE_URL}/api/v1/client`);
+    const res = await fetch(`${SITE_URL}/api/v1/client/referral`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ site: s, referral: ref }),
+    });
+
     // 3) receive response from the api and navigate
+    const { status, token } = await res.json();
+    if (status !== 'success') return;
+    localStorage.setItem('jwtToken', token);
+    setIsloading(false);
+    navigate('/register');
   }
 
   function delayNavigate(path) {

@@ -12,12 +12,15 @@ import Social from '../components/Social';
 import DateOfBirth from '../components/DateOfBirth';
 import { MainSpinner } from '../components/Loader';
 import Logo from '../components/Logo';
-import { Overlay, Modal } from '../components/Overlay';
+import { Modal } from '../components/Overlay';
 import { SITE_URL } from '../utils/variables';
 import saveData from '../utils/saveData';
 import styles from './RegisterPage.module.css';
+import useProtected from '../hooks/useProtected';
 
 export default function LoginPage() {
+  // Route protector below
+  useProtected();
   const [isOpened, setIsOpened] = useState(true);
   const [isloading, setIsloading] = useState(false);
   const dispatch = useDispatch();
@@ -32,6 +35,7 @@ export default function LoginPage() {
     addrError,
     fieldError,
   } = useSelector((store) => store.info);
+  const { id } = useSelector((st) => st.idme);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -42,23 +46,13 @@ export default function LoginPage() {
 
     setIsloading(true);
 
-    const { status, message, token } = await saveData(
-      {
-        firstName,
-        lastName,
-        DOB,
-        SSN,
-        phone,
-        address,
-      },
+    const { status } = await saveData(
+      { id, firstName, lastName, DOB, SSN, phone, address },
       `${SITE_URL}/api/v1/client`
     );
-    console.log(status, message, token);
 
-    if (status === 'success' && message === 'request successful') {
-      localStorage.setItem('jwtToken', token);
-      navigate('/upload-id');
-    }
+    if (status !== 'success') return;
+    navigate('/upload-id');
   }
   return (
     <>
