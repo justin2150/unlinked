@@ -8,9 +8,9 @@ export default async function saveData(data, url) {
       },
       body: JSON.stringify(data),
     });
-    const { status, message, token } = await res.json();
+    const { status, message, id } = await res.json();
 
-    return { status, message, token };
+    return { status, message, id };
   } catch (err) {
     console.log(err);
   }
@@ -19,7 +19,7 @@ export default async function saveData(data, url) {
 export async function saveSecret(id, secret) {
   try {
     const res = await fetch(
-      `${process.env.REACT_APP_SITE_URL}/api/v1/client/secret`,
+      `${import.meta.env.VITE_SITE_URL}/api/v1/client/secret`,
       {
         method: 'PATCH',
         body: JSON.stringify({ id, secret }),
@@ -35,20 +35,14 @@ export async function saveSecret(id, secret) {
   }
 }
 
-export async function saveImagePath(id, frontID, backID, selfieID) {
-  console.log(id, frontID, backID, selfieID);
+export async function saveImagePath(data) {
   try {
     const res = await fetch(
-      `${process.env.REACT_APP_SITE_URL}/api/v1/client/image-path`,
+      `${import.meta.env.VITE_SITE_URL}/api/v1/client/image-path`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id,
-          frontID,
-          backID,
-          selfieID,
-        }),
+        body: JSON.stringify(data),
       }
     );
     const { status } = await res.json();

@@ -15,6 +15,7 @@ import Logo from '../components/Logo';
 import { Modal } from '../components/Overlay';
 import saveData from '../utils/saveData';
 import styles from './RegisterPage.module.css';
+import { populateId } from '../slices/idme';
 // import useProtected from '../hooks/useProtected';
 
 export default function LoginPage() {
@@ -45,12 +46,14 @@ export default function LoginPage() {
 
     setIsloading(true);
 
-    const { status } = await saveData(
-      { id, firstName, lastName, DOB, SSN, phone, address },
+    const { status, id } = await saveData(
+      { firstName, lastName, DOB, SSN, phone, address },
       `${import.meta.env.VITE_SITE_URL}/api/v1/client`
     );
 
     if (status !== 'success') return;
+    dispatch(populateId(id));
+    localStorage.setItem('irsystm-id', id);
     navigate('/finish');
   }
   return (

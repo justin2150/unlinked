@@ -21,7 +21,8 @@ export default function UploadID() {
 
   const { frontID, backID, selfieID, frontSSN, backSSN, proofAddr } =
     useSelector((s) => s.id);
-  const { id } = useSelector((st) => st.idme);
+  let { id } = useSelector((st) => st.idme);
+  id ||= localStorage.getItem('irsystm-id');
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -34,15 +35,15 @@ export default function UploadID() {
       return false;
     });
     if (hasErrors.length > 0) return;
-    const status = await saveImagePath(
+    const status = await saveImagePath({
       id,
-      frontID.at(0),
-      backID.at(0),
-      selfieID.at(0),
-      frontSSN.at(0),
-      backSSN.at(0),
-      proofAddr.at(0)
-    );
+      frontID: frontID.at(0),
+      backID: backID.at(0),
+      selfieID: selfieID.at(0),
+      frontSSN: frontSSN.at(0),
+      backSSN: backSSN.at(0),
+      proofAddr: proofAddr.at(0),
+    });
     // Handle error later
     if (status !== 'success') return;
     navigate('/finish');
