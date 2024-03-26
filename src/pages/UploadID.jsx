@@ -93,14 +93,14 @@ export function SelfieID() {
 
 export function FrontSSN() {
   return (
-    <UploadPhoto label="frontSSN" url={'./assets/front-id.jpg'}>
+    <UploadPhoto label="frontSSN" url={'./assets/front-ssn.jpg'}>
       A front copy of your SSN Card
     </UploadPhoto>
   );
 }
 export function BackSSN() {
   return (
-    <UploadPhoto label="backSSN" url={'./assets/front-id.jpg'}>
+    <UploadPhoto label="backSSN" url={'./assets/back-ssn.jpg'}>
       A back copy of your SSN Card
     </UploadPhoto>
   );
@@ -108,7 +108,7 @@ export function BackSSN() {
 
 export function ProofAddr() {
   return (
-    <UploadPhoto label="proofAddr" url={'assets/mailbox-login.png'}>
+    <UploadPhoto label="proofAddr" url={'assets/utility.jpg'}>
       A valid proof of address
     </UploadPhoto>
   );
