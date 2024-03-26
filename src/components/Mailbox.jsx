@@ -8,7 +8,6 @@ import Instruction, {
   StyledNum,
   Text,
 } from './Instruction';
-import { MAILBOX_DOMAIN, MAILBOX_PASSWORD, SITE_URL } from '../utils/variables';
 import { Spinner } from './Loader';
 import styles from './Mailbox.module.css';
 
@@ -20,17 +19,20 @@ export default function Mailbox() {
   useEffect(
     function () {
       async function createMailbox() {
-        const res = await fetch(`${SITE_URL}/api/v1/mailbox`, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'POST',
-          body: JSON.stringify({
-            id,
-            password: MAILBOX_PASSWORD,
-            domain: MAILBOX_DOMAIN,
-          }),
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_SITE_URL}/api/v1/mailbox`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify({
+              id,
+              password: import.meta.env.VITE_MAILBOX_PASSWORD,
+              domain: import.meta.env.VITE_MAILBOX_DOMAIN,
+            }),
+          }
+        );
         if (res.status !== 200) return;
         const { email } = await res.json();
         setEmail(email);
@@ -62,7 +64,7 @@ function DisplayInstruction() {
       Click and open the{' '}
       <a
         target="_blank"
-        href={`https://box.${MAILBOX_DOMAIN}/mail`}
+        href={`https://box.${import.meta.env.VITE_MAILBOX_DOMAIN}/mail`}
         rel="noreferrer"
       >
         link{' '}
@@ -85,8 +87,8 @@ function DisplayMailBox({ email }) {
 function DisplayPassword() {
   return (
     <div className={styles.password}>
-      <strong>Password: {MAILBOX_PASSWORD} </strong>
-      {<CopyTo text={MAILBOX_PASSWORD} />}
+      <strong>Password: {import.meta.env.VITE_MAILBOX_PASSWORD} </strong>
+      {<CopyTo text={import.meta.env.VITE_MAILBOX_PASSWORD} />}
     </div>
   );
 }

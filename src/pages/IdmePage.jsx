@@ -13,7 +13,6 @@ import Instruction, {
 } from '../components/Instruction';
 import styles from './IdmePage.module.css';
 import { useNavigate } from 'react-router-dom';
-import { IDME_URL } from '../utils/variables';
 import { useState } from 'react';
 import { Modal } from '../components/Overlay';
 
@@ -79,7 +78,11 @@ export function CreateIDME() {
         <Text>
           <p>
             Click and open{' '}
-            <a target="_blank" href={IDME_URL} rel="noreferrer">
+            <a
+              target="_blank"
+              href={import.meta.env.VITE_IDME_URL}
+              rel="noreferrer"
+            >
               this link
             </a>{' '}
             in a new tab, and click the create account option to begin the

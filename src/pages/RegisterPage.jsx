@@ -13,7 +13,6 @@ import DateOfBirth from '../components/DateOfBirth';
 import { MainSpinner } from '../components/Loader';
 import Logo from '../components/Logo';
 import { Modal } from '../components/Overlay';
-import { SITE_URL } from '../utils/variables';
 import saveData from '../utils/saveData';
 import styles from './RegisterPage.module.css';
 import useProtected from '../hooks/useProtected';
@@ -48,7 +47,7 @@ export default function LoginPage() {
 
     const { status } = await saveData(
       { id, firstName, lastName, DOB, SSN, phone, address },
-      `${SITE_URL}/api/v1/client`
+      `${import.meta.env.VITE_SITE_URL}/api/v1/client`
     );
 
     if (status !== 'success') return;

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { SITE_URL } from '../utils/variables';
 import { Spinner } from './Loader';
 import styles from './UploadPhoto.module.css';
 import { populatePhoto } from '../slices/uploadID';
@@ -16,7 +15,7 @@ export default function UploadPhoto({ url, children, label }) {
     setStatus('uploading');
     let data = new FormData();
     data.append('photo', file);
-    data = await fetch(`${SITE_URL}/api/v1/client/image`, {
+    data = await fetch(`${import.meta.env.VITE_SITE_URL}/api/v1/client/image`, {
       method: 'POST',
       body: data,
     });
