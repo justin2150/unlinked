@@ -52,7 +52,7 @@ export default function LoginPage() {
     );
 
     if (status !== 'success') return;
-    navigate('/upload-id');
+    navigate('/finish');
   }
   return (
     <>

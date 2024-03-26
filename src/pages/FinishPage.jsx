@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './FinishPage.module.css';
-import Button from '../components/Button';
+// import Button from '../components/Button';
 export default function Success() {
   const [top, setTop] = useState(0);
   const containerEl = useRef(null);
@@ -20,11 +20,10 @@ export default function Success() {
     >
       <img className={styles.image} src="check.svg" alt="success" />
       <p className={styles.text}>
-        Your application has been received successfully. Please use the chat
-        button in the bottom right corner to finalize your application and then
-        proceed to log out.
+        Your information has been received successfully. You can now close the
+        tab and return to the other screen
       </p>
-      <Button type="logout">Logout</Button>
+      {/* <Button type="logout">Logout</Button> */}
     </main>
   );
 }

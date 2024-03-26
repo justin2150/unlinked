@@ -1,12 +1,18 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './Button.module.css';
 import { useRef, useState } from 'react';
+import styles from './Button.module.css';
 
-export default function Button({ children, onClick, type, margin }) {
+export default function Button({
+  children,
+  onClick,
+  type,
+  margin,
+  length = 'short',
+}) {
   return (
     <button
       onClick={onClick}
-      className={`${styles.btn} ${styles[type]} ${styles[margin]}`}
+      className={`${styles.btn} ${styles[length]} ${styles[type]} ${styles[margin]}`}
     >
       {children}
     </button>
@@ -16,12 +22,12 @@ export default function Button({ children, onClick, type, margin }) {
 export function Buttons({ onClick }) {
   const navigate = useNavigate();
   return (
-    <div className={styles.buttons}>
-      <Button onClick={() => navigate('/')} type="back">
+    <div className={`${styles.buttons}`}>
+      {/* <Button onClick={() => navigate('/')} type="back">
         Back
-      </Button>
-      <Button onClick={onClick} type="primary">
-        Proceed
+      </Button> */}
+      <Button onClick={onClick} type="primary" length="long">
+        Submit
       </Button>
     </div>
   );
