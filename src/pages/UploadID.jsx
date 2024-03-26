@@ -6,13 +6,13 @@ import { displayErr } from '../slices/uploadID';
 import styles from './UploadID.module.css';
 import { saveImagePath } from '../utils/saveData';
 import { useNavigate } from 'react-router-dom';
-import useProtected from '../hooks/useProtected';
+// import useProtected from '../hooks/useProtected';
 import { Modal } from '../components/Overlay';
 import { useState } from 'react';
 
 export default function UploadID() {
   // Route protector below
-  useProtected();
+  // useProtected();
   const [isOpen, setIsOpen] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();

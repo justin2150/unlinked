@@ -15,11 +15,11 @@ import Logo from '../components/Logo';
 import { Modal } from '../components/Overlay';
 import saveData from '../utils/saveData';
 import styles from './RegisterPage.module.css';
-import useProtected from '../hooks/useProtected';
+// import useProtected from '../hooks/useProtected';
 
 export default function LoginPage() {
   // Route protector below
-  useProtected();
+  // useProtected();
   const [isOpened, setIsOpened] = useState(true);
   const [isloading, setIsloading] = useState(false);
   const dispatch = useDispatch();
