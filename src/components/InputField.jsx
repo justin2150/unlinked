@@ -9,6 +9,7 @@ export default function InputField({
   isFocus,
   setIsFocus,
   error = '',
+  type = 'text',
 }) {
   return (
     <div className={`${styles.wrapper} ${styles[flex]}`}>
@@ -22,12 +23,12 @@ export default function InputField({
         </label>
       }
       <input
+        type={type}
         className={`${styles.input} ${error ? styles['input-error'] : ''}`}
         onFocus={() => setIsFocus(true)}
         onBlur={() => {
           value === '' && setIsFocus(false);
         }}
-        type="text"
         value={value}
         onChange={onChange}
       />

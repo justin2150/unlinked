@@ -3,7 +3,6 @@ import { Buttons } from '../components/Button';
 import Logo from '../components/Logo';
 import UploadPhoto from '../components/UploadPhoto';
 import { displayErr } from '../slices/uploadID';
-import styles from './UploadID.module.css';
 import { saveImagePath } from '../utils/saveData';
 import { useNavigate } from 'react-router-dom';
 // import useProtected from '../hooks/useProtected';
@@ -52,7 +51,7 @@ export default function UploadID() {
     <>
       {isOpen && <ModalInstruction onClose={setIsOpen} />}
       <main className="main">
-        <form className={styles.wrapper}>
+        <form>
           <Logo />
           <FrontID />
           <BackID />

@@ -1,0 +1,77 @@
+.form {
+  width: 100%;
+  padding: 48px;
+  border: solid var(--gray);
+  border-radius: 8px;
+  color: var(--gray);
+  max-height: 500px;
+  margin-top: calc((100vh - 500px) / 3);
+}
+.h1 {
+  color: var(--gray-dark);
+  text-align: center;
+  margin-bottom: 30px;
+}
+.label {
+  font-size: 20px;
+  color: var(--gray-dark);
+  margin-bottom: 10px;
+}
+.select-box {
+  position: relative;
+  cursor: pointer;
+  background-color: var(--light);
+  margin-bottom: 40px;
+  width: 75%;
+}
+.select-box > p {
+  border: solid;
+  border-radius: 4px;
+  padding: 0 20px;
+  line-height: 2;
+  position: relative;
+  color: var(--gray-dark);
+  --arrow-offset-y: 10px;
+  --arrow-angle: 45deg;
+}
+.select-box > p::after {
+  content: '';
+  position: absolute;
+  top: var(--arrow-offset-y);
+  transform: rotate(var(--arrow-angle));
+  right: 20px;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-right: solid;
+  border-bottom: solid;
+  transition: transform 0.75s;
+}
+.select-box > p:hover {
+  background-color: var(--gray);
+  color: var(--white);
+}
+
+.select-box .content {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  background-color: var(--light);
+  transition: all 0.75s;
+}
+.enlarge {
+  max-height: 250px !important;
+}
+
+.content p {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.content p:hover {
+  background-color: var(--gray);
+  color: var(--white);
+}

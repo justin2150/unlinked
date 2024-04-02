@@ -14,7 +14,6 @@ import { MainSpinner } from '../components/Loader';
 import Logo from '../components/Logo';
 import { Modal } from '../components/Overlay';
 import saveData from '../utils/saveData';
-import styles from './RegisterPage.module.css';
 import { populateId } from '../slices/idme';
 // import useProtected from '../hooks/useProtected';
 
@@ -59,12 +58,12 @@ export default function LoginPage() {
   return (
     <>
       {isOpened && <ModalInstruction onClose={setIsOpened} />}
-      {isloading && <MainSpinner>Securely logging in</MainSpinner>}
+      {isloading && <MainSpinner>Securely uploading data</MainSpinner>}
       <main
         className={`main ${isOpened || isloading ? 'opaque' : 'not-opaque'}`}
       >
         <Logo />
-        <form className={styles.form}>
+        <form className="form">
           <FirstName />
           <LastName />
           <DateOfBirth />

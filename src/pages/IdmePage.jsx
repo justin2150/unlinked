@@ -1,8 +1,8 @@
 import useProtected from '../hooks/useProtected';
 import Mailbox from '../components/Mailbox';
 import InputIdme from '../components/InputIdme';
-import SecretMethod from '../components/SecretMethod';
-import GenerateCode from '../components/GenerateCode';
+// import SecretMethod from '../components/SecretMethod';
+// import GenerateCode from '../components/GenerateCode';
 import { Buttons } from '../components/Button';
 import Logo from '../components/Logo';
 import Instruction, {
@@ -36,10 +36,10 @@ export default function Idme() {
           <Mailbox />
           <CreateIDME />
           <InputIdme />
-          <VerifyIdme />
+          {/* <VerifyIdme />
           <Select2FA />
           <SecretMethod />
-          <GenerateCode />
+          <GenerateCode /> */}
           <VerificationPath />
           <FinalScreen />
           <Buttons onClick={handleSubmit} />
