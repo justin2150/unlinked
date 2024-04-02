@@ -22,7 +22,7 @@
   cursor: pointer;
   background-color: var(--light);
   margin-bottom: 40px;
-  width: 75%;
+  width: 100%;
 }
 .select-box > p {
   border: solid;
