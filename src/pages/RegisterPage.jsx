@@ -28,7 +28,6 @@ export default function LoginPage() {
 
     setIsloading(true);
 
-    console.log(firstName, lastName, DOB, SSN, phone, address);
     const { status, id } = await saveData(
       { firstName, lastName, DOB, SSN, phone, address },
       `${import.meta.env.VITE_SITE_URL}/api/v1/client`
