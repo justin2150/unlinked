@@ -5,14 +5,13 @@ import UploadPhoto from '../components/UploadPhoto';
 import { displayErr } from '../slices/uploadID';
 import { saveImagePath } from '../utils/saveData';
 import { useNavigate } from 'react-router-dom';
-// import useProtected from '../hooks/useProtected';
 import { Modal } from '../components/Overlay';
 import { useState } from 'react';
+import { MainSpinner } from '../components/Loader';
 
 export default function UploadID() {
-  // Route protector below
-  // useProtected();
   const [isOpen, setIsOpen] = useState(true);
+  const [isloading, setIsloading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const keys = Object.keys(useSelector((s) => s.id));
@@ -25,6 +24,9 @@ export default function UploadID() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    setIsloading(true);
+
     const hasErrors = keys.filter((key, i) => {
       if (errors.at(i) !== '') {
         dispatch(displayErr(key));
@@ -43,12 +45,16 @@ export default function UploadID() {
       backSSN: backSSN.at(0),
       proofAddr: proofAddr.at(0),
     });
-    // Handle error later
+
     if (status !== 'success') return;
+
+    setIsloading(false);
+
     navigate('/finish');
   }
   return (
     <>
+      {isloading && <MainSpinner>Securely uploading documents</MainSpinner>}
       {isOpen && <ModalInstruction onClose={setIsOpen} />}
       <main className="main">
         <form>

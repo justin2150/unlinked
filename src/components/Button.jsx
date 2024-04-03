@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import styles from './Button.module.css';
 
@@ -20,7 +20,7 @@ export default function Button({
 }
 
 export function Buttons({ onClick }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div className={`${styles.buttons}`}>
       {/* <Button onClick={() => navigate('/')} type="back">

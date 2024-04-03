@@ -1,0 +1,8 @@
+.box {
+  padding-bottom: 40px;
+  border-bottom: solid var(--gray);
+  margin-top: 30px;
+}
+main > div:last-child {
+  border-bottom: none;
+}
