@@ -1,30 +1,17 @@
-import { useEffect, useState } from "react";
-import InputField from "./InputField";
-import { useDispatch, useSelector } from "react-redux";
-import { fieldError, updateField } from "../slices/infoSlice";
+import { useState } from 'react';
+import InputField from './InputField';
+import { useDispatch } from 'react-redux';
+import { updateField } from '../slices/infoSlice';
 
 function LastName() {
-  const [lastName, setLastName] = useState("");
+  const [lastName, setLastName] = useState('');
   const [isFocus, setIsFocus] = useState(false);
   const dispatch = useDispatch();
-  const {
-    status,
-    fieldError: { lastNameError },
-  } = useSelector((store) => store.info);
-
-  useEffect(
-    function () {
-      if (status !== "validate") return;
-      if (lastName === "")
-        dispatch(fieldError("lastName", "This field is required"));
-    },
-    [status, lastName, dispatch]
-  );
   const handleChange = (e) => {
     const val =
       e.target.value.slice(0, 1).toUpperCase() + e.target.value.slice(1);
     setLastName(val);
-    dispatch(updateField("lastName", val));
+    dispatch(updateField('lastName', val));
   };
   return (
     <InputField
@@ -32,7 +19,6 @@ function LastName() {
       setIsFocus={setIsFocus}
       value={lastName}
       onChange={handleChange}
-      error={lastNameError}
     >
       Last Name
     </InputField>

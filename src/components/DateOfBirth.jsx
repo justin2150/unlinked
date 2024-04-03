@@ -1,27 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import InputField from './InputField';
-import { useDispatch, useSelector } from 'react-redux';
-import { fieldError, updateField } from '../slices/infoSlice';
+import { useDispatch } from 'react-redux';
+import { updateField } from '../slices/infoSlice';
 
 export default function DateOfBirth() {
   const [DOB, setDOB] = useState('');
   const [isFocus, setIsFocus] = useState(false);
   const dispatch = useDispatch();
-  const {
-    status,
-    fieldError: { DOBError },
-  } = useSelector((store) => store.info);
-
-  useEffect(
-    function () {
-      if (status !== 'validate') return;
-      if (DOB === '') {
-        dispatch(fieldError('DOB', 'This field is required'));
-      } else if (DOB.split('').filter((d) => d !== '-').length < 8)
-        dispatch(fieldError('DOB', 'Date of birth is not valid'));
-    },
-    [DOB, dispatch, status]
-  );
 
   const handleChange = (e) => {
     const val = e.target.value;
@@ -59,7 +44,6 @@ export default function DateOfBirth() {
       setIsFocus={setIsFocus}
       value={DOB}
       onChange={handleChange}
-      error={DOBError}
     >
       Date Of Birth
     </InputField>

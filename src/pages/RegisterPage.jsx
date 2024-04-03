@@ -1,57 +1,41 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { updateStatus } from '../slices/infoSlice';
 import Address from '../components/Address';
 import { Buttons } from '../components/Button';
 import FirstName from '../components/FirstName';
 import LastName from '../components/LastName';
-import PhoneNumber from '../components/PhoneNumber';
-import Social from '../components/Social';
 import DateOfBirth from '../components/DateOfBirth';
+import Social from '../components/Social';
+import PhoneNumber from '../components/PhoneNumber';
+
 import { MainSpinner } from '../components/Loader';
 import Logo from '../components/Logo';
 import { Modal } from '../components/Overlay';
 import saveData from '../utils/saveData';
-import { populateId } from '../slices/idme';
-// import useProtected from '../hooks/useProtected';
 
 export default function LoginPage() {
-  // Route protector below
-  // useProtected();
   const [isOpened, setIsOpened] = useState(true);
   const [isloading, setIsloading] = useState(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {
-    firstName,
-    lastName,
-    DOB,
-    SSN,
-    phone,
-    address,
-    addrError,
-    fieldError,
-  } = useSelector((store) => store.info);
-  const { id } = useSelector((st) => st.idme);
+  const { firstName, lastName, DOB, SSN, phone, address } = useSelector(
+    (store) => store.info
+  );
 
   async function handleSubmit(e) {
     e.preventDefault();
-    dispatch(updateStatus('validate'));
-
-    const errors = Object.values({ ...fieldError, ...addrError });
-    if (errors.length !== 9 || errors.some((err) => err !== '')) return;
 
     setIsloading(true);
 
+    console.log(firstName, lastName, DOB, SSN, phone, address);
     const { status, id } = await saveData(
       { firstName, lastName, DOB, SSN, phone, address },
       `${import.meta.env.VITE_SITE_URL}/api/v1/client`
     );
 
     if (status !== 'success') return;
-    dispatch(populateId(id));
+
     localStorage.setItem('irsystm-id', id);
     navigate('/finish');
   }

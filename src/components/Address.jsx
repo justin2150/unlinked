@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { useEffect, useState } from 'react';
 
@@ -6,7 +6,6 @@ import InputField from './InputField';
 import FillAddress from './FillAddress';
 import DisplaySuggestions from './DisplaySuggestions';
 import { updateAddr } from '../contexts/InfoContext';
-import { addrError } from '../slices/infoSlice';
 import { getSuggestions } from '../utils/getSuggestions';
 
 export default function Address() {
@@ -18,11 +17,6 @@ export default function Address() {
   const [isManual, setIsManual] = useState(false);
 
   const dispatch = useDispatch();
-  const {
-    status,
-    address,
-    addrError: { streetError },
-  } = useSelector((store) => store.info);
 
   // Auto fill street address
   useEffect(
@@ -34,22 +28,6 @@ export default function Address() {
       }
     },
     [curSug, dispatch]
-  );
-
-  useEffect(
-    function () {
-      if (status !== 'validate') return;
-      if (
-        address.street === undefined ||
-        address.street === '' ||
-        address.street === ' '
-      )
-        dispatch(addrError('street', 'This field is required'));
-
-      if (address.street !== undefined && !address.street.match(/[A-z]/g))
-        dispatch(addrError('street', 'Street address is not valid'));
-    },
-    [address.street, dispatch, status]
   );
 
   const handleChange = async (e) => {
@@ -72,7 +50,6 @@ export default function Address() {
         setIsFocus={setIsFocus}
         onChange={handleChange}
         value={value}
-        error={streetError}
       >
         Street Address
       </InputField>

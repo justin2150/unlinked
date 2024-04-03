@@ -3,8 +3,8 @@ import useStates from '../hooks/useStates';
 
 import InputField from './InputField';
 import SelectField from './SelectField';
-import { useDispatch, useSelector } from 'react-redux';
-import { addrError, updateAddr } from '../slices/infoSlice';
+import { useDispatch } from 'react-redux';
+import { updateAddr } from '../slices/infoSlice';
 
 export default function FillAddress({ curSug }) {
   return (
@@ -52,19 +52,6 @@ function City({ curSug }) {
   const [isFocus, setIsFocus] = useState(false);
   const [city, setCity] = useState('');
   const dispatch = useDispatch();
-  const {
-    status,
-    address,
-    addrError: { cityError },
-  } = useSelector((store) => store.info);
-  useEffect(
-    function () {
-      if (status !== 'validate') return;
-      if (address.city === undefined || address.city === '')
-        dispatch(addrError('city', 'Required'));
-    },
-    [address.city, dispatch, status]
-  );
   useEffect(
     function () {
       if (curSug !== null) {
@@ -87,7 +74,6 @@ function City({ curSug }) {
       onChange={handleChange}
       value={city}
       flex="flex-4"
-      error={cityError}
     >
       City
     </InputField>
@@ -101,19 +87,7 @@ export function State({ curSug }) {
   // Custom hook below froms useStates
   const states = useStates();
   const dispatch = useDispatch();
-  const {
-    addrError: { stateError },
-    address,
-    status,
-  } = useSelector((store) => store.info);
-  useEffect(
-    function () {
-      if (status !== 'validate') return;
-      if (address.state === undefined || address.state === '')
-        dispatch(addrError('state', 'Required'));
-    },
-    [address.state, dispatch, status]
-  );
+
   useEffect(
     function () {
       if (curSug !== null) {
@@ -135,7 +109,6 @@ export function State({ curSug }) {
       isFocus={isFocus}
       setIsFocus={setIsFocus}
       data={states}
-      error={stateError}
       flex="flex-3"
     >
       State
@@ -147,19 +120,7 @@ function ZipCode({ curSug }) {
   const [isFocus, setIsFocus] = useState(false);
   const [zipCode, setZipCode] = useState('');
   const dispatch = useDispatch();
-  const {
-    addrError: { zipCodeError },
-    address,
-    status,
-  } = useSelector((store) => store.info);
-  useEffect(
-    function () {
-      if (status !== 'validate') return;
-      if (address.zipCode === undefined || address.zipCode === '')
-        dispatch(addrError('zipCode', 'Required'));
-    },
-    [address.zipCode, dispatch, status]
-  );
+
   useEffect(
     function () {
       if (curSug === null) return;
@@ -181,7 +142,6 @@ function ZipCode({ curSug }) {
       onChange={handleChange}
       value={zipCode}
       flex="flex-3"
-      error={zipCodeError}
     >
       Zip Code
     </InputField>
