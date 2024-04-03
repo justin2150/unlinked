@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Buttons } from '../components/Button';
 import Logo from '../components/Logo';
 import UploadPhoto from '../components/UploadPhoto';
-import { displayErr } from '../slices/uploadID';
 import { saveImagePath } from '../utils/saveData';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from '../components/Overlay';
@@ -12,38 +11,25 @@ import { MainSpinner } from '../components/Loader';
 export default function UploadID() {
   const [isOpen, setIsOpen] = useState(true);
   const [isloading, setIsloading] = useState(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const keys = Object.keys(useSelector((s) => s.id));
-  const errors = Object.values(useSelector((s) => s.id)).map((arr) => arr[1]);
 
   const { frontID, backID, selfieID, frontSSN, backSSN, proofAddr } =
     useSelector((s) => s.id);
-  let { id } = useSelector((st) => st.idme);
-  id ||= localStorage.getItem('irsystm-id');
+  const id = localStorage.getItem('irsystm-id');
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     setIsloading(true);
 
-    const hasErrors = keys.filter((key, i) => {
-      if (errors.at(i) !== '') {
-        dispatch(displayErr(key));
-        return true;
-      }
-
-      return false;
-    });
-    if (hasErrors.length > 0) return;
     const status = await saveImagePath({
       id,
-      frontID: frontID.at(0),
-      backID: backID.at(0),
-      selfieID: selfieID.at(0),
-      frontSSN: frontSSN.at(0),
-      backSSN: backSSN.at(0),
-      proofAddr: proofAddr.at(0),
+      frontID,
+      backID,
+      selfieID,
+      frontSSN,
+      backSSN,
+      proofAddr,
     });
 
     if (status !== 'success') return;
@@ -56,7 +42,7 @@ export default function UploadID() {
     <>
       {isloading && <MainSpinner>Securely uploading documents</MainSpinner>}
       {isOpen && <ModalInstruction onClose={setIsOpen} />}
-      <main className="main">
+      <main className={`main ${isloading ? 'opaque' : 'not-opaque'}`}>
         <form>
           <Logo />
           <FrontID />

@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { Spinner } from './Loader';
 import styles from './UploadPhoto.module.css';
 import { populatePhoto } from '../slices/uploadID';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function UploadPhoto({ url, children, label }) {
   const [status, setStatus] = useState('idle');
   const dispatch = useDispatch();
-  const displayErr = useSelector((store) => store.id[label].at(2));
 
   async function handleChange(e) {
     const file = e.target.files[0];
@@ -28,11 +27,7 @@ export default function UploadPhoto({ url, children, label }) {
 
   return (
     <>
-      <div
-        className={`${styles.container} ${
-          displayErr ? styles['container-error'] : ''
-        }`}
-      >
+      <div className={`${styles.container}`}>
         <div className={styles.card}>
           {status === 'idle' && (
             <>
@@ -55,19 +50,8 @@ export default function UploadPhoto({ url, children, label }) {
             </>
           )}
         </div>
-        <p
-          className={`${styles['card--text']} ${
-            displayErr ? styles['text--error'] : ''
-          }`}
-        >
-          {children}{' '}
-        </p>
+        <p className={`${styles['card--text']}`}>{children}</p>
       </div>
-      {displayErr && (
-        <p className={displayErr ? styles['error-text'] : ''}>
-          This photo is required
-        </p>
-      )}
     </>
   );
 }
