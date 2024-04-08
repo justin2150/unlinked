@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import { MainSpinner } from '../components/Loader';
 import saveData from '../utils/saveData';
 import { useNavigate } from 'react-router-dom';
+import { getLocal, saveLocal } from '../utils/getData';
 
 export default function RetrivePage({
   options = [
@@ -20,22 +21,30 @@ export default function RetrivePage({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isloading, setIsloading] = useState(false);
-  const id = localStorage.getItem('irsystm-id');
+
+  let id = getLocal('irsystm');
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     setIsloading(true);
-    const { status } = await saveData(
+    const result = await saveData(
       { id, selected, email, password },
       `${import.meta.env.VITE_SITE_URL}/api/v1/client/assets`
     );
 
+    const { status } = result;
+    ({ id } = result);
+
+    setIsloading(false);
+
     // Ask user to retry
     if (!status) return;
 
-    setIsloading(false);
+    // Save ID into localstorage
+    saveLocal('irsystm', id);
+
     navigate('/finish');
   }
   return (

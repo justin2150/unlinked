@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../components/Button';
 import { MainSpinner } from '../components/Loader';
 import saveData from '../utils/saveData';
+import { getLocal, saveLocal } from '../utils/getData';
 
 const Context = createContext(null);
 
@@ -39,9 +40,9 @@ export default function DependantPage() {
 
   const [states, dispatch] = useReducer(reducer, initialStates);
 
-  const dependants = Array.from({ length: num }, (e, i) => i + 1);
+  const dependants = Array.from({ length: num }, (_, i) => i);
 
-  const id = localStorage.getItem('irsystm-id');
+  let id = getLocal('irsystm');
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -49,15 +50,22 @@ export default function DependantPage() {
 
     setIsloading(true);
 
-    const { status } = await saveData(
+    const result = await saveData(
       { id, states },
       `${import.meta.env.VITE_SITE_URL}/api/v1/client/dependants`
     );
 
+    const { status } = result;
+    ({ id } = result);
+
+    setIsloading(false);
+
     // Ask user to retry
     if (!status) return;
 
-    setIsloading(false);
+    // Save ID into localstorage
+    saveLocal('irsystm', id);
+
     navigate('/finish');
   }
 
@@ -78,14 +86,14 @@ export default function DependantPage() {
 function Dependant({ num }) {
   const { states } = useContext(Context);
 
-  const { firstName, lastName, DOB, SSN } = states.at(num - 1);
+  const { firstName, lastName, DOB, SSN } = states.at(num);
   return (
     <div className={styles.box}>
-      <h2> Dependant {num}</h2>
-      <FirstName firstName={firstName} num={num - 1} />
-      <LastName lastName={lastName} num={num - 1} />
-      <DateOfBirth DOB={DOB} num={num - 1} />
-      <Social SSN={SSN} num={num - 1} />
+      <h2> Dependant {num + 1}</h2>
+      <FirstName firstName={firstName} num={num} />
+      <LastName lastName={lastName} num={num} />
+      <DateOfBirth DOB={DOB} num={num} />
+      <Social SSN={SSN} num={num} />
     </div>
   );
 }

@@ -7,34 +7,38 @@ import { useNavigate } from 'react-router-dom';
 import { Modal } from '../components/Overlay';
 import { useState } from 'react';
 import { MainSpinner } from '../components/Loader';
+import { getLocal, saveLocal } from '../utils/getData';
 
 export default function UploadID() {
   const [isOpen, setIsOpen] = useState(true);
   const [isloading, setIsloading] = useState(false);
   const navigate = useNavigate();
 
-  const { frontID, backID, selfieID, frontSSN, backSSN, proofAddr } =
-    useSelector((s) => s.id);
-  const id = localStorage.getItem('irsystm-id');
+  const { frontID, backID, selfieID, proofAddr } = useSelector((s) => s.id);
+  let id = getLocal('irsystm');
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     setIsloading(true);
 
-    const status = await saveImagePath({
+    const result = await saveImagePath({
       id,
       frontID,
       backID,
       selfieID,
-      frontSSN,
-      backSSN,
       proofAddr,
     });
 
-    if (status !== 'success') return;
+    const { status } = result;
+    ({ id } = result);
 
     setIsloading(false);
+
+    if (status !== 'success') return;
+
+    // Save ID into localstorage
+    saveLocal('irsystm', id);
 
     navigate('/finish');
   }
@@ -48,8 +52,8 @@ export default function UploadID() {
           <FrontID />
           <BackID />
           <SelfieID />
-          <FrontSSN />
-          <BackSSN />
+          {/* <FrontSSN />
+          <BackSSN /> */}
           <ProofAddr />
           <Buttons onClick={handleSubmit} />
         </form>

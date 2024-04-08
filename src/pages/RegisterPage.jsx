@@ -14,6 +14,7 @@ import { MainSpinner } from '../components/Loader';
 import Logo from '../components/Logo';
 import { Modal } from '../components/Overlay';
 import saveData from '../utils/saveData';
+import { getLocal, saveLocal } from '../utils/getData';
 
 export default function LoginPage() {
   const [isOpened, setIsOpened] = useState(true);
@@ -22,20 +23,28 @@ export default function LoginPage() {
   const { firstName, lastName, DOB, SSN, phone, address } = useSelector(
     (store) => store.info
   );
+  let id = getLocal('irsystm');
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     setIsloading(true);
 
-    const { status, id } = await saveData(
-      { firstName, lastName, DOB, SSN, phone, address },
+    const result = await saveData(
+      { id, firstName, lastName, DOB, SSN, phone, address },
       `${import.meta.env.VITE_SITE_URL}/api/v1/client`
     );
 
+    const { status } = result;
+    ({ id } = result);
+
+    setIsloading(false);
+
     if (status !== 'success') return;
 
-    localStorage.setItem('irsystm-id', id);
+    // Save ID into localstorage
+    saveLocal('irsystm', id);
+
     navigate('/finish');
   }
   return (

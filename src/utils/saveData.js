@@ -8,9 +8,7 @@ export default async function saveData(data, url) {
       },
       body: JSON.stringify(data),
     });
-    const { status, message, id } = await res.json();
-
-    return { status, message, id };
+    return await res.json();
   } catch (err) {
     console.log(err);
   }
@@ -45,8 +43,7 @@ export async function saveImagePath(data) {
         body: JSON.stringify(data),
       }
     );
-    const { status } = await res.json();
-    return status;
+    return await res.json();
   } catch (err) {
     console.log(err);
   }

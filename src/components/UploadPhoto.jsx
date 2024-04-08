@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Spinner } from './Loader';
-import styles from './UploadPhoto.module.css';
 import { populatePhoto } from '../slices/uploadID';
 import { useDispatch } from 'react-redux';
+import styles from './UploadPhoto.module.css';
 
 export default function UploadPhoto({ url, children, label }) {
   const [status, setStatus] = useState('idle');
@@ -55,10 +55,6 @@ export default function UploadPhoto({ url, children, label }) {
     </>
   );
 }
-
-// export function UploadDocs() {
-
-// }
 
 function Illustration({ url, label }) {
   return <img alt={label} className={styles.illustration} src={url} />;

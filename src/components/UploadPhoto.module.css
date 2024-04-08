@@ -2,14 +2,6 @@
   margin-bottom: 1.5em;
   padding-right: 1em;
 }
-.container-error {
-  margin-bottom: 0.5em;
-}
-.error-text {
-  color: var(--danger);
-  margin: 0 1em 1em;
-  font-size: 0.75em;
-}
 .card {
   display: flex;
   align-items: center;
@@ -37,10 +29,6 @@
   padding-bottom: 0.5em;
   padding-left: 0.5em;
   border-bottom: 2px solid var(--secondary);
-}
-.text--error {
-  color: var(--danger);
-  border-bottom-color: var(--danger);
 }
 .uploading {
   background-color: var(--primary);
