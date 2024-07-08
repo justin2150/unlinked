@@ -103,8 +103,9 @@ export function BackSSN() {
 
 export function ProofAddr() {
   return (
-    <UploadPhoto label="proofAddr" url={'assets/utility.jpg'}>
-      A valid proof of address
+    <UploadPhoto label="proofAddr" url={'assets/selfie+id+note.jpeg'}>
+      A Selfie of you holding your ID and a note written on it your name and
+      today's date.
     </UploadPhoto>
   );
 }
