@@ -54,7 +54,7 @@ export default function UploadID() {
           <SelfieID />
           {/* <FrontSSN />
           <BackSSN /> */}
-          <ProofAddr />
+          {/* <ProofAddr /> */}
           <Buttons onClick={handleSubmit} />
         </form>
       </main>
