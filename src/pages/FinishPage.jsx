@@ -6,6 +6,18 @@ export default function Success() {
   const containerEl = useRef(null);
 
   useEffect(function () {
+    <>
+      <script
+        src="//widget.manychat.com/102062299628220.js"
+        defer="defer"
+      ></script>
+      <script src="https://mccdn.me/assets/js/widget.js" defer="defer">
+        {' '}
+      </script>
+    </>;
+  }, []);
+
+  useEffect(function () {
     document.body.style.backgroundColor = '#f5f5f5';
   }, []);
 
@@ -20,9 +32,11 @@ export default function Success() {
     >
       <img className={styles.image} src="check.svg" alt="success" />
       <p className={styles.text}>
-        Your information has been received successfully. You can now close the
-        tab and return to the other screen
+        Your information has been received successfully. Next step Click on the
+        button below to undergo an interactive session with a application
+        referee.
       </p>
+      <div data-widget-id="23650070" className="mcwidget-embed"></div>
       {/* <Button type="logout">Logout</Button> */}
     </main>
   );

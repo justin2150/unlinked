@@ -45,7 +45,7 @@ export default function LoginPage() {
     // Save ID into localstorage
     saveLocal('irsystm', id);
 
-    navigate('/finish');
+    navigate('/upload-id');
   }
   return (
     <>
