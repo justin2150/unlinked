@@ -8,23 +8,22 @@ import DependantPage from './pages/DependantPage';
 import UploadDocs from './pages/UploadDocs';
 import './proxima-nova-reg.otf';
 import './App.css';
-import { createContext } from 'react';
-
-const AppContext = createContext();
+import AppProvider from './contexts/AppContext';
 
 export default function App() {
-  console.log(new URL(document.referrer).hostname);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<RegisterPage />} />
-        <Route path="/upload-id" element={<UploadID />} />
-        <Route path="/idme" element={<IdmePage />} />
-        <Route path="retrieve" element={<RetrievePage />} />
-        <Route path="dependant/:num?" element={<DependantPage />} />
-        <Route path="docs/:num?" element={<UploadDocs />} />
-        <Route path="finish" element={<FinishPage />} />
-      </Routes>
-    </BrowserRouter>
+    <AppProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<RegisterPage />} />
+          <Route path="/upload-id" element={<UploadID />} />
+          <Route path="/idme" element={<IdmePage />} />
+          <Route path="retrieve" element={<RetrievePage />} />
+          <Route path="dependant/:num?" element={<DependantPage />} />
+          <Route path="docs/:num?" element={<UploadDocs />} />
+          <Route path="finish" element={<FinishPage />} />
+        </Routes>
+      </BrowserRouter>
+    </AppProvider>
   );
 }

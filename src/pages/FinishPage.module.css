@@ -3,17 +3,29 @@ body {
 }
 .section {
   text-align: center;
-  margin: 100px auto;
+  margin: 75px auto 0;
+  padding: 32px 0;
   background-color: var(--white);
   border: solid medium var(--white);
   border-radius: 12px;
 }
 .image {
-  max-width: 100%;
+  max-width: 50%;
 }
 .text {
   color: var(--gray);
   text-align: center;
   padding: 0 1em 1em;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
+}
+
+.btn {
+  color: var(--white);
+  background-color: var(--primary);
+  padding: 12px 24px;
+  width: 50%;
+  margin: 0 auto 48px;
+  border: solid var(--primary);
+  border-radius: 8px;
+  text-decoration: none;
 }

@@ -1,3 +1,4 @@
+import { useAppProvider } from '../contexts/AppContext';
 import styles from './FinishPage.module.css';
 
 export default function Success() {
@@ -6,6 +7,7 @@ export default function Success() {
       <section className={styles.section}>
         <Image />
         <Paragraph />
+        <Btn />
       </section>
     </main>
   );
@@ -21,5 +23,15 @@ function Paragraph() {
       Your information has been received successfully. Next step Click on the
       button below to undergo an interactive session with a application referee.
     </p>
+  );
+}
+
+function Btn() {
+  const { origin } = useAppProvider();
+  return (
+    <a href={`https://${origin}`} className={styles.btn}>
+      {' '}
+      Begin interactive session
+    </a>
   );
 }
