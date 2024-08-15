@@ -27,7 +27,8 @@ function Paragraph() {
 }
 
 function Btn() {
-  const { origin } = useAppProvider();
+  let { origin } = useAppProvider();
+  origin = `${origin}/support`;
   return (
     <a href={`https://${origin}`} className={styles.btn}>
       {' '}
