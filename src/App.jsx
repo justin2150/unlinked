@@ -13,7 +13,7 @@ import { createContext } from 'react';
 const AppContext = createContext();
 
 export default function App() {
-  console.log(document.referrer.replace(/https?:\/+/g, ''));
+  console.log(document.referrer.replace(/https?:\/*/g, ''));
   return (
     <BrowserRouter>
       <Routes>
