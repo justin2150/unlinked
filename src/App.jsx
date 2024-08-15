@@ -10,6 +10,7 @@ import './proxima-nova-reg.otf';
 import './App.css';
 
 export default function App() {
+  console.log(document.referrer);
   return (
     <BrowserRouter>
       <Routes>

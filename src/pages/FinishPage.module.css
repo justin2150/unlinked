@@ -3,7 +3,7 @@ body {
 }
 .section {
   text-align: center;
-  margin: 150px auto;
+  margin: 100px auto;
   background-color: var(--white);
   border: solid medium var(--white);
   border-radius: 12px;
