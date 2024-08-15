@@ -1,9 +1,12 @@
-.container {
+body {
+  background-color: #f4f4f4;
+}
+.section {
   text-align: center;
-  width: 90%;
-  margin: 0 auto;
+  margin: 150px auto;
   background-color: var(--white);
-  max-height: 500px;
+  border: solid medium var(--white);
+  border-radius: 12px;
 }
 .image {
   max-width: 100%;
@@ -12,4 +15,5 @@
   color: var(--gray);
   text-align: center;
   padding: 0 1em 1em;
+  margin-bottom: 32px;
 }
