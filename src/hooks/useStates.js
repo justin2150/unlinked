@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 export default function useStates() {
   const [states, setStates] = useState([]);
-  console.log(import.meta.env.VITE_SITE_URL);
   useEffect(function () {
     const fetchAsync = async () => {
       try {

@@ -8,9 +8,12 @@ import DependantPage from './pages/DependantPage';
 import UploadDocs from './pages/UploadDocs';
 import './proxima-nova-reg.otf';
 import './App.css';
+import { createContext } from 'react';
+
+const AppContext = createContext();
 
 export default function App() {
-  console.log(document.referrer);
+  console.log(document.referrer.replace(/https?:\/+/g, ''));
   return (
     <BrowserRouter>
       <Routes>
