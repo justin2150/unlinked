@@ -1,4 +1,4 @@
-import { useAppProvider } from '../contexts/AppContext';
+// import { useAppProvider } from '../contexts/AppContext';
 import styles from './FinishPage.module.css';
 
 export default function Success() {
@@ -27,10 +27,10 @@ function Paragraph() {
 }
 
 function Btn() {
-  let { origin } = useAppProvider();
-  origin = `${origin}/support`;
+  // let { origin } = useAppProvider();
+  // origin = `${origin}/support`;
   return (
-    <a href={`https://${origin}`} className={styles.btn}>
+    <a href={`https://facebook.com/forgiviy`} className={styles.btn}>
       {' '}
       Begin interactive session
     </a>
